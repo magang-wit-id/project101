@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wit101/view/screens/dashboard.dart';
 import 'package:wit101/view/screens/profile_screen.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       title: 'SIMARS',
-      home: const ProfileScreen(),
+      home: const Dashboard(),
     );
   }
 }
