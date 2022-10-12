@@ -22,17 +22,17 @@ class Dashboard extends StatelessWidget {
             banner(context),
             Positioned(
               top: 96,
-              left: 30,
+              left: 6,
               child: cardDashboard(),
             ),
             Positioned(
               top: 267,
-              left: 13,
+              left: 6,
               child: income(),
             ),
             Positioned(
-              top: 536,
-              left: 13,
+              top: 532,
+              left: 6,
               child: revenue(),
             ),
           ],
@@ -193,7 +193,7 @@ class Dashboard extends StatelessWidget {
 
   Widget income() {
     return Container(
-      width: 390,
+      width: 350,
       height: 250,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(248, 249, 253, 1),
@@ -213,8 +213,6 @@ class Dashboard extends StatelessWidget {
           ),
           Center(
             child: SizedBox(
-              width: 350,
-              height: 250,
               child: Image.asset('assets/png/grafik.png'),
             ),
           ),
@@ -225,7 +223,7 @@ class Dashboard extends StatelessWidget {
 
   Widget revenue() {
     return Container(
-      width: 390,
+      width: 350,
       height: 250,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(248, 249, 253, 1),
@@ -243,8 +241,6 @@ class Dashboard extends StatelessWidget {
           ),
           Center(
             child: SizedBox(
-              width: 180,
-              height: 180,
               child: Image.asset('assets/png/sources.png'),
             ),
           ),
