@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:wit101/widgets/MyDrawer.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      key: _scaffoldKey,
+      appBar: AppBar( backgroundColor: Colors.transparent,elevation: 0, ),
+       drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           clipBehavior: Clip.none,
@@ -301,3 +308,4 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
+
