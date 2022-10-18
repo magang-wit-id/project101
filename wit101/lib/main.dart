@@ -3,9 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:wit101/view/screens/addproject.dart';
 import 'package:wit101/view/screens/adduser.dart';
 import 'package:wit101/view/screens/dashboard.dart';
-import 'package:wit101/view/screens/profile_screen.dart';
-import 'package:wit101/view/screens/projectlist.dart';
-import 'package:wit101/view/screens/userlist.dart';
+
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(

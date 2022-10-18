@@ -9,6 +9,10 @@ class MyColors {
     return const Color(0xFFCBCBCB);
   }
 
+  static disabledGrey() {
+    return const Color(0xFFF2F2F2);
+  }
+
   static darkGrey() {
     return const Color(0xFF9C9C9C);
   }

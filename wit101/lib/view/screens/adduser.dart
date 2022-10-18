@@ -12,6 +12,8 @@ class AddUser extends StatefulWidget {
 class _AddUserState extends State<AddUser> {
   var controllerName = TextEditingController();
 
+  var controllerEmail = TextEditingController();
+
   var controllerUsername = TextEditingController();
 
   var controllerPassword = TextEditingController();
@@ -27,46 +29,85 @@ class _AddUserState extends State<AddUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            banner(context),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 710,
-              width: 370,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ],
+      body: Column(
+        children: [
+          banner(context),
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: 20,
+                left: 20,
+                right: 20,
               ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    child: changeProfile(context),
-                  ),
-                  Center(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Stack(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(
+                                top: 20,
+                              ),
+                              child: CircleAvatar(
+                                radius: 70,
+                                backgroundImage:
+                                    AssetImage('assets/png/stockprofile.png'),
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 117, left: 100),
+                              child: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: ((builder) =>
+                                        bottomSheet(context)),
+                                  );
+                                },
+                                child: const Icon(
+                                  Icons.camera_alt,
+                                  color: Color.fromRGBO(232, 23, 31, 1),
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         Container(
-                          margin: const EdgeInsets.only(top: 205),
+                          margin: const EdgeInsets.only(top: 14),
                           width: 320,
                           height: 50,
                           child: TextFormField(
-                            controller: controllerName,
+                            controller: controllerUsername,
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              labelText: 'Name',
+                              hintText: 'Username',
                             ),
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500, fontSize: 12),
@@ -77,12 +118,15 @@ class _AddUserState extends State<AddUser> {
                           width: 320,
                           height: 50,
                           child: TextFormField(
-                            controller: controllerUsername,
+                            controller: controllerEmail,
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              labelText: 'Username',
+                              hintText: 'Email',
                             ),
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500, fontSize: 12),
@@ -96,6 +140,9 @@ class _AddUserState extends State<AddUser> {
                             controller: controllerPassword,
                             obscureText: _showPassword,
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -109,7 +156,7 @@ class _AddUserState extends State<AddUser> {
                                   setState(() {});
                                 },
                               ),
-                              labelText: "Password",
+                              hintText: "Password",
                             ),
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500, fontSize: 12),
@@ -120,12 +167,15 @@ class _AddUserState extends State<AddUser> {
                           width: 320,
                           height: 50,
                           child: TextFormField(
-                            controller: controllerUsername,
+                            controller: controllerAddress,
                             decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              labelText: 'Address',
+                              hintText: 'Address',
                             ),
                             style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.w500, fontSize: 12),
@@ -149,17 +199,17 @@ class _AddUserState extends State<AddUser> {
                           height: 50,
                           child: buttonCancel(),
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -175,9 +225,8 @@ class _AddUserState extends State<AddUser> {
       height: 154,
       child: Stack(
         children: [
-          Positioned(
-            top: 89,
-            left: 20,
+          Padding(
+            padding: EdgeInsets.only(left: 20, top: 69),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -194,49 +243,12 @@ class _AddUserState extends State<AddUser> {
               ],
             ),
           ),
-          Positioned(
-            left: 280,
+          Container(
+            alignment: Alignment.topRight,
             child: Image.asset('assets/png/circle1.png'),
           ),
         ],
       ),
-    );
-  }
-
-  Widget bannerProfile(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20)),
-            color: Color.fromRGBO(232, 23, 31, 1),
-          ),
-          width: MediaQuery.of(context).size.width,
-          height: 154,
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 89, left: 20),
-          child: Text(
-            'Create',
-            style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w700, color: Colors.white, fontSize: 16),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 110, left: 20),
-          child: Text(
-            'New Account',
-            style: GoogleFonts.poppins(
-                fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 295),
-          child: Image.asset('assets/png/circle1.png'),
-        ),
-      ],
     );
   }
 

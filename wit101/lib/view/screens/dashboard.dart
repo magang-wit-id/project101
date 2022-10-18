@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/widgets/MyDrawer.dart';
@@ -9,31 +8,32 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
     return Scaffold(
       extendBodyBehindAppBar: true,
       key: _scaffoldKey,
-      appBar: AppBar( backgroundColor: Colors.transparent,elevation: 0, ),
-       drawer: MyDrawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           clipBehavior: Clip.none,
           children: [
             banner(context),
-            Positioned(
-              top: 96,
-              left: 6,
-              child: cardDashboard(),
-            ),
-            Positioned(
-              top: 267,
-              left: 6,
-              child: income(),
-            ),
-            Positioned(
-              top: 532,
-              left: 6,
-              child: revenue(),
+            cardDashboard(),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: EdgeInsets.only(top: 267),
+              child: Column(
+                children: [
+                  income(),
+                  SizedBox(height: 18,),
+                  revenue(),
+                ],
+              ),
             ),
           ],
         ),
@@ -44,7 +44,7 @@ class Dashboard extends StatelessWidget {
   Widget banner(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 131,
+      height: 141,
       decoration: BoxDecoration(
         color: MyColors.red(),
         borderRadius: const BorderRadius.only(
@@ -56,7 +56,7 @@ class Dashboard extends StatelessWidget {
         children: [
           Positioned(
             right: 13,
-            top: 44,
+            top: 50,
             child: PoppinsText.custom(
                 text: 'Welcome, Admin',
                 fontSize: 16,
@@ -70,8 +70,14 @@ class Dashboard extends StatelessWidget {
 
   Widget cardDashboard() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 96),
+        ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
               width: 180,
@@ -130,6 +136,8 @@ class Dashboard extends StatelessWidget {
           ],
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
               width: 180,
@@ -304,4 +312,3 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
-

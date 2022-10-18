@@ -55,7 +55,7 @@ class _UserListState extends State<UserList> {
           Positioned(
             top: 130,
             left: 10,
-            child: Container(
+            child: SizedBox(
               height: 50,
               width: 370,
               child: searchView(),
@@ -69,7 +69,7 @@ class _UserListState extends State<UserList> {
   Widget searchView() {
     return TextField(
       decoration: InputDecoration(
-        suffixIcon: Icon(Icons.search),
+        suffixIcon: const Icon(Icons.search),
         hintText: 'Search',
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -98,13 +98,15 @@ class _UserListState extends State<UserList> {
         padding: const EdgeInsets.symmetric(horizontal: 30),
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
+          return SizedBox(
             width: 360,
             height: 70,
             child: Row(
               children: [
                 Image.asset('assets/png/profile2.png'),
-                SizedBox(width: 20,),
+                const SizedBox(
+                  width: 20,
+                ),
                 PoppinsText.custom(
                     text: 'Admin',
                     fontSize: 15,

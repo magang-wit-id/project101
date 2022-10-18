@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class DetailUser extends StatefulWidget {
+  const DetailUser({Key? key}) : super(key: key);
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<DetailUser> createState() => _DetailUserState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _DetailUserState extends State<DetailUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.black(),
       extendBodyBehindAppBar: true,
+      backgroundColor: MyColors.black(),
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 50,
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pop(),
           icon: SvgPicture.asset('assets/svg/profile_back_icon.svg'),
         ),
       ),
@@ -43,9 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
-                    backgroundColor: Colors.grey,
+                  CircleAvatar(
                     radius: 57,
+                    child: Image.asset('assets/png/profile3.png'),
                   ),
                   const SizedBox(
                     height: 20,
@@ -89,8 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           children: [
                             Container(
-                              width: double.infinity,
-                              height: 80,
+                              width: 280,
+                              height: 50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
@@ -105,19 +106,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 25,
-                                      bottom: 25,
-                                      left: 27,
-                                      right: 24,
+                                      top: 10,
+                                      left: 20,
+                                      right: 10,
                                     ),
                                     child: SvgPicture.asset(
-                                        'assets/svg/profile_email_icon.svg'),
+                                        'assets/svg/email_icon.svg'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 19,
-                                      bottom: 19,
-                                      right: 27,
+                                      top: 10,
+                                      right: 10,
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -125,12 +124,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       children: [
                                         PoppinsText.custom(
                                             text: 'Email',
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             warna: MyColors.black(),
                                             fontWeight: FontWeight.w600),
                                         PoppinsText.custom(
                                             text: 'Admin',
-                                            fontSize: 14,
+                                            fontSize: 12,
+                                            warna: MyColors.darkGrey(),
+                                            fontWeight: FontWeight.w600),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            Container(
+                              width: 280,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(0, 1),
+                                      blurRadius: 5,
+                                      color: Colors.black.withOpacity(0.3),
+                                    ),
+                                  ],
+                                  color: Colors.white),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 20,
+                                      right: 10,
+                                    ),
+                                    child: SvgPicture.asset(
+                                      'assets/svg/profile_id_icon.svg',
+                                      width: 20,
+                                      height: 20,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 10,
+                                      left: 10,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        PoppinsText.custom(
+                                            text: 'User ID',
+                                            fontSize: 12,
+                                            warna: MyColors.black(),
+                                            fontWeight: FontWeight.w600),
+                                        PoppinsText.custom(
+                                            text: 'Admin',
+                                            fontSize: 12,
                                             warna: MyColors.darkGrey(),
                                             fontWeight: FontWeight.w600),
                                       ],
@@ -142,8 +193,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const SizedBox(height: 14),
                             Container(
                               constraints: const BoxConstraints(
-                                  minHeight: 80, maxHeight: 125),
-                              width: double.infinity,
+                                  minHeight: 40, maxHeight: 80),
+                              width: 280,
+                              height: 50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
@@ -158,19 +210,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 25,
-                                      bottom: 25,
-                                      left: 27,
-                                      right: 24,
+                                      top: 10,
+                                      left: 20,
+                                      right: 10,
+                                      bottom: 10,
                                     ),
                                     child: SvgPicture.asset(
-                                        'assets/svg/profile_address_icon.svg'),
+                                      'assets/svg/profile_address_icon.svg',
+                                      width: 20,
+                                      height: 20,
+                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 19,
-                                      bottom: 19,
-                                      right: 27,
+                                      top: 5,
+                                      left: 10,
                                     ),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -179,7 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       children: [
                                         PoppinsText.custom(
                                             text: 'Address',
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             warna: MyColors.black(),
                                             fontWeight: FontWeight.w600),
                                         Container(
@@ -188,11 +242,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           width: 172,
                                           child: SingleChildScrollView(
                                             child: Text(
-                                              'Jl.dago',
+                                              'Admin',
                                               maxLines: 10,
                                               style: GoogleFonts.poppins(
                                                   color: MyColors.darkGrey(),
-                                                  fontSize: 14,
+                                                  fontSize: 12,
                                                   fontWeight: FontWeight.w600),
                                             ),
                                           ),
@@ -205,8 +259,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             const SizedBox(height: 14),
                             Container(
-                              width: double.infinity,
-                              height: 80,
+                              width: 280,
+                              height: 50,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   boxShadow: [
@@ -221,32 +275,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 25,
-                                      bottom: 25,
-                                      left: 27,
-                                      right: 24,
+                                      top: 12,
+                                      left: 22,
+                                      right: 10,
                                     ),
                                     child: SvgPicture.asset(
-                                        'assets/svg/profile_id_icon.svg'),
+                                        'assets/svg/password_icon.svg'),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 19,
-                                      bottom: 19,
-                                      right: 27,
+                                      top: 5,
                                     ),
                                     child: Column(
+                                      mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         PoppinsText.custom(
-                                            text: 'ID',
-                                            fontSize: 14,
+                                            text: 'Password',
+                                            fontSize: 12,
                                             warna: MyColors.black(),
                                             fontWeight: FontWeight.w600),
                                         PoppinsText.custom(
-                                            text: 'UID0001',
-                                            fontSize: 14,
+                                            text: 'Admin',
+                                            fontSize: 12,
                                             warna: MyColors.darkGrey(),
                                             fontWeight: FontWeight.w600),
                                       ],
@@ -256,22 +308,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                             const Spacer(),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 40,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: PoppinsText.custom(
-                                    text: 'Change Account',
-                                    fontSize: 12,
-                                    warna: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 0,
-                                  backgroundColor: MyColors.red(),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: PoppinsText.custom(
+                                  text: 'Delete Account',
+                                  fontSize: 12,
+                                  warna: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                fixedSize: const Size(280, 40),
+                                backgroundColor: MyColors.red(),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
                             ),
