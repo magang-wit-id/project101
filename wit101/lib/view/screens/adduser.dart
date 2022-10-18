@@ -155,7 +155,7 @@ class _AddUserState extends State<AddUser> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
           ],
