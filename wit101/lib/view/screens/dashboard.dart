@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/widgets/MyDrawer.dart';
@@ -18,7 +17,7 @@ class Dashboard extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           clipBehavior: Clip.none,
@@ -27,13 +26,11 @@ class Dashboard extends StatelessWidget {
             cardDashboard(),
             Container(
               alignment: Alignment.topCenter,
-              padding: const EdgeInsets.only(top: 267),
+              padding: EdgeInsets.only(top: 267),
               child: Column(
                 children: [
                   income(),
-                  SizedBox(
-                    height: 18,
-                  ),
+                  SizedBox(height: 18,),
                   revenue(),
                 ],
               ),
@@ -73,12 +70,13 @@ class Dashboard extends StatelessWidget {
 
   Widget cardDashboard() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Padding(
           padding: EdgeInsets.only(top: 96),
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
@@ -138,6 +136,7 @@ class Dashboard extends StatelessWidget {
           ],
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
