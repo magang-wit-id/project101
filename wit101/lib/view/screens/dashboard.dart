@@ -44,7 +44,7 @@ class Dashboard extends StatelessWidget {
   Widget banner(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 131,
+      height: 141,
       decoration: BoxDecoration(
         color: MyColors.red(),
         borderRadius: const BorderRadius.only(
@@ -56,7 +56,7 @@ class Dashboard extends StatelessWidget {
         children: [
           Positioned(
             right: 13,
-            top: 44,
+            top: 50,
             child: PoppinsText.custom(
                 text: 'Welcome, Admin',
                 fontSize: 16,
