@@ -50,7 +50,7 @@ class _UserListState extends State<UserList> {
           ),
           Positioned(
             left: 300,
-            child: Image.asset('assets/png/circle_4.png'),
+            child: Image.asset('assets/png/circle_5.png', alignment: Alignment.topRight,),
           ),
           Positioned(
             top: 130,
