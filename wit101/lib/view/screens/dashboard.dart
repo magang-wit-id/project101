@@ -9,31 +9,34 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
     return Scaffold(
       extendBodyBehindAppBar: true,
       key: _scaffoldKey,
-      appBar: AppBar( backgroundColor: Colors.transparent,elevation: 0, ),
-       drawer: MyDrawer(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: MyDrawer(),
       body: SingleChildScrollView(
         child: Stack(
           clipBehavior: Clip.none,
           children: [
             banner(context),
-            Positioned(
-              top: 96,
-              left: 6,
-              child: cardDashboard(),
-            ),
-            Positioned(
-              top: 267,
-              left: 6,
-              child: income(),
-            ),
-            Positioned(
-              top: 532,
-              left: 6,
-              child: revenue(),
+            cardDashboard(),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: const EdgeInsets.only(top: 267),
+              child: Column(
+                children: [
+                  income(),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  revenue(),
+                ],
+              ),
             ),
           ],
         ),
@@ -70,8 +73,13 @@ class Dashboard extends StatelessWidget {
 
   Widget cardDashboard() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 96),
+        ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
               width: 180,
@@ -130,6 +138,7 @@ class Dashboard extends StatelessWidget {
           ],
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
               width: 180,
@@ -304,4 +313,3 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
-
