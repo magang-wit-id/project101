@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:wit101/widgets/MyDrawer.dart';
 
 class projectlist extends StatefulWidget {
   const projectlist({Key? key}) : super(key: key);
 
   @override
-  State<projectlist> createState() => _UserListState();
+  State<projectlist> createState() => _projectlistState();
 }
  
-class _UserListState extends State<projectlist> {
+class _projectlistState extends State<projectlist> {
   TextEditingController SearchController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: const MyDrawer(),
       body: Column(
         children: [
           banner(),

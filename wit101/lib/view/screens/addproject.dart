@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:wit101/widgets/MyDrawer.dart';
 
 class addproject extends StatefulWidget {
   const addproject({Key? key}) : super(key: key);
@@ -28,7 +29,14 @@ class _addprojectState extends State<addproject> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
+      extendBodyBehindAppBar: true,
+     
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: const MyDrawer(),
       body: Column(
         children: [
           banner(context),

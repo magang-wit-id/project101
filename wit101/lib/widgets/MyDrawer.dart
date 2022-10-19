@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:wit101/view/screens/addproject.dart';
+import 'package:wit101/view/screens/adduser.dart';
+import 'package:wit101/view/screens/dashboard.dart';
+import 'package:wit101/view/screens/projectlist.dart';
+import 'package:wit101/view/screens/userlist.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -39,20 +44,30 @@ class MyDrawer extends StatelessWidget {
             padding: EdgeInsets.zero,
             children: [
            Padding(padding: EdgeInsets.only(top: 10,)),
-           Row(
-             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-             children: [           
-               Image(image: AssetImage('assets/png/Vector.png'), width: 18 , height: 18, color: Colors.black,),
-           PoppinsText.custom(text: 'Dashboard', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-                  Padding(padding: EdgeInsets.only(left: 120)),
-                SizedBox(height: 40,)
-             ],
+           GestureDetector(
+            onTap: (){
+              
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => Dashboard())));
+            },
+             child: Row(
+               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+               children: [           
+                 Image(image: AssetImage('assets/png/Vector.png'), width: 18 , height: 18, color: Colors.black,),
+             PoppinsText.custom(text: 'Dashboard', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
+                    Padding(padding: EdgeInsets.only(left: 120)),
+                  SizedBox(height: 40,)
+               ],
+             ),
            ),
            Padding(padding: EdgeInsets.only(bottom: 10)),
             Container(height: 2, color: Colors.grey.shade300,),
            ExpansionTile(
-             title:    PoppinsText.custom(text: 'User', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-             leading: Icon(Icons.person_outline , color: Colors.black,),
+            textColor: MyColors.red(),
+            iconColor: MyColors.red(),
+             title:   Text('User',style: TextStyle(
+              fontSize: 12 , fontWeight: FontWeight.w500
+             ),),
+             leading: Icon((Icons.perm_identity_rounded)),
              children: <Widget>[
                Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -63,22 +78,34 @@ class MyDrawer extends StatelessWidget {
                        mainAxisAlignment: MainAxisAlignment.start,
                        children: <Widget>[
                          SizedBox(height: 10,),
-                         Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           children: [
-                             Icon(Icons.people),
-                             PoppinsText.custom(text: 'User List', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-                              Padding(padding: EdgeInsets.only(left: 120)),
-                           ],
+                         GestureDetector(
+                          onTap: (){ 
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> UserList()));
+                          },
+                           child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                             children: [
+                               Icon(Icons.people),
+                               PoppinsText.custom(text: 'User List', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
+                                Padding(padding: EdgeInsets.only(left: 120)),
+                             ],
+                           ),
                          ),
                           SizedBox(height: 10,),
-                         Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           children: [
-                             Icon(Icons.person_add),
-                             PoppinsText.custom(text: 'User Add', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-                              Padding(padding: EdgeInsets.only(left: 120)),
-                           ],
+                         GestureDetector(
+                        
+                             onTap: (){ 
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> AddUser()));
+                          },
+            
+                           child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                             children: [
+                               Icon(Icons.person_add),
+                               PoppinsText.custom(text: 'User Add', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
+                                Padding(padding: EdgeInsets.only(left: 120)),
+                             ],
+                           ),
                          ),
                           SizedBox(height: 10,),
                          Row(
@@ -100,8 +127,10 @@ class MyDrawer extends StatelessWidget {
            ),
           
            ExpansionTile(
-             title: PoppinsText.custom(text: 'Project', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-             leading: Icon(Icons.folder_outlined ,color: Colors.black, ),
+               textColor: MyColors.red(),
+            iconColor: MyColors.red(),
+             title: Text('Project', style: TextStyle( fontSize: 12, fontWeight: FontWeight.w500),),
+             leading: Icon(Icons.wallet),
              children: <Widget>[
                Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -113,22 +142,34 @@ class MyDrawer extends StatelessWidget {
                        mainAxisSize: MainAxisSize.min,
                        children: <Widget>[
                          SizedBox(height: 10,),
-                           Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                             children: [
-                               Image(image: AssetImage('assets/png/iconShare.png'), width: 20 , height: 20, color:MyColors.black(),),
-                               PoppinsText.custom(text: 'Project List', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-                                Padding(padding: EdgeInsets.only(left: 120)),
-                             ],
+                           GestureDetector(
+                            onTap: (){ 
+                              
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> projectlist()));
+                        
+                            },
+                             child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                               children: [
+                                 Image(image: AssetImage('assets/png/iconShare.png'), width: 20 , height: 20, color:MyColors.black(),),
+                                 PoppinsText.custom(text: 'Project List', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
+                                  Padding(padding: EdgeInsets.only(left: 120)),
+                               ],
+                             ),
                            ),
                             SizedBox(height: 10,),
-                           Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                             children: [
-                               Icon(Icons.create_new_folder_rounded),
-                              PoppinsText.custom(text: 'Add Project', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-                                Padding(padding: EdgeInsets.only(left: 120)),
-                             ],
+                           GestureDetector( 
+                            onTap: (){ 
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> addproject()));
+                          },
+                             child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                               children: [
+                                 Icon(Icons.create_new_folder_rounded),
+                                PoppinsText.custom(text: 'Add Project', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
+                                  Padding(padding: EdgeInsets.only(left: 120)),
+                               ],
+                             ),
                            ),
                             SizedBox(height: 10,),
                            Row(
@@ -149,9 +190,11 @@ class MyDrawer extends StatelessWidget {
              ],
            ),
            
-            ExpansionTile(
-             title: PoppinsText.custom(text: 'Pricing', fontSize: 12, warna: MyColors.black(), fontWeight: FontWeight.w500),
-             leading:  Image(image: AssetImage('assets/png/iconPrice.png'), width: 18 , height: 18, color:MyColors.black(),),
+            ExpansionTile(  
+             textColor: MyColors.red(),
+            iconColor: MyColors.red(),
+             title: Text('Pricing', style: TextStyle( fontSize: 12, fontWeight: FontWeight.w500),),
+             leading:  Icon(Icons.attach_money_rounded),
              children: <Widget>[
                Padding(
                  padding: const EdgeInsets.symmetric(horizontal: 16.0),

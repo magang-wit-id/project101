@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
+import 'package:wit101/widgets/MyDrawer.dart';
 
 class AddUser extends StatefulWidget {
   const AddUser({Key? key}) : super(key: key);
@@ -29,6 +30,12 @@ class _AddUserState extends State<AddUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: const MyDrawer(),
       body: Column(
         children: [
           banner(context),
@@ -226,7 +233,7 @@ class _AddUserState extends State<AddUser> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 20, top: 69),
+            padding: EdgeInsets.only(left: 20, top: 90),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
