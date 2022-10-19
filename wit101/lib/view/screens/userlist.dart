@@ -15,9 +15,18 @@ class _UserListState extends State<UserList> {
     return Scaffold(
       body: Column(
         children: [
-          banner(),
+          Stack(
+            children: [
+              banner(),
+              Container(
+                padding: EdgeInsets.only(top: 130, left: 10, right: 10),
+                alignment: Alignment.center,
+                child: searchView(),
+              ),
+            ],
+          ),
           const SizedBox(
-            height: 40,
+            height: 10,
           ),
           Expanded(
             child: listUser(),
@@ -48,45 +57,40 @@ class _UserListState extends State<UserList> {
                 warna: Colors.white,
                 fontWeight: FontWeight.w700),
           ),
-          Positioned(
-            left: 300,
+          Container(
+            alignment: Alignment.topRight,
             child: Image.asset('assets/png/circle_5.png', alignment: Alignment.topRight,),
           ),
-          Positioned(
-            top: 130,
-            left: 10,
-            child: SizedBox(
-              height: 50,
-              width: 370,
-              child: searchView(),
-            ),
-          )
+
         ],
       ),
     );
   }
 
   Widget searchView() {
-    return TextField(
-      decoration: InputDecoration(
-        suffixIcon: const Icon(Icons.search),
-        hintText: 'Search',
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(
-            width: 2.5,
-            color: MyColors.lightGrey(),
+    return Container(
+      height: 50,
+      child: TextField(
+        decoration: InputDecoration(
+          suffixIcon: const Icon(Icons.search),
+          hintText: 'Search',
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              width: 2.5,
+              color: MyColors.lightGrey(),
+            ),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(
-            width: 2.5,
-            color: MyColors.lightGrey(),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(
+              width: 2.5,
+              color: MyColors.lightGrey(),
+            ),
           ),
+          filled: true,
+          fillColor: Colors.white,
         ),
-        filled: true,
-        fillColor: Colors.white,
       ),
     );
   }
