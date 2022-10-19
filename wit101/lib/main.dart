@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wit101/view/screens/addproject.dart';
-import 'package:wit101/view/screens/adduser.dart';
-import 'package:wit101/view/screens/dashboard.dart';
-
+import 'package:wit101/view/screens/detail_project_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-  runApp(
-    const MyApp(),
+    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (_) => runApp(
+      const MyApp(),
+    ),
   );
 }
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const Dashboard(),
-    ); 
+      home: const DetailProjectScreen(),
+    );
   }
 }

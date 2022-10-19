@@ -16,6 +16,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   var controllerID = TextEditingController();
   var controllerEmail = TextEditingController();
+  var controllerAddress = TextEditingController();
   var controllerPass = TextEditingController();
   String? dropdownPick;
   List<String> dropdownList = ['Admin', 'Market', 'Account Management'];
@@ -38,74 +39,75 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Stack(
-            fit: StackFit.expand,
-            alignment: Alignment.topCenter,
-            children: [
-              Positioned(
-                left: 0,
-                child: Image.asset('assets/png/circle_1.png'),
-              ),
-              Positioned(
-                right: 0,
-                top: 210,
-                child: Image.asset('assets/png/circle_3.png'),
-              ),
-              Positioned(
-                top: 100,
-                bottom: 0,
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      radius: 57,
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          Positioned(
-                            right: -17,
-                            bottom: -6,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: MyColors.red(),
-                                fixedSize: const Size(30, 30),
-                                shape: const CircleBorder(),
-                              ),
-                              child: SvgPicture.asset(
-                                  height: 20,
-                                  'assets/svg/profile_photo_icon.svg'),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            Positioned(
+              left: 0,
+              child: Image.asset('assets/png/circle_1.png'),
+            ),
+            Positioned(
+              right: 0,
+              top: 210,
+              child: Image.asset('assets/png/circle_3.png'),
+            ),
+            Positioned(
+              top: 100,
+              bottom: 0,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.grey,
+                    radius: 57,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Positioned(
+                          right: -17,
+                          bottom: -6,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: MyColors.red(),
+                              fixedSize: const Size(30, 30),
+                              shape: const CircleBorder(),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.topCenter,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25),
-                            topRight: Radius.circular(25),
+                            child: SvgPicture.asset(
+                                height: 20,
+                                'assets/svg/profile_photo_icon.svg'),
                           ),
                         ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.topCenter,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          topRight: Radius.circular(25),
+                        ),
+                      ),
+                      child: SingleChildScrollView(
                         child: Padding(
                           padding: const EdgeInsets.only(
                             top: 42,
-                            bottom: 34,
                             left: 40,
+                            bottom: 42,
                             right: 40,
                           ),
                           child: Form(
                             key: _formKey,
                             child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 profileDisabledTextField('UID0001'),
                                 const SizedBox(height: 14),
@@ -114,7 +116,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     textInputType: TextInputType.text,
                                     maxLines: 1,
                                     minLines: 1,
-                                    hintText: 'entah apa ini'),
+                                    hintText: 'Name'),
                                 const SizedBox(height: 14),
                                 profileTextField(
                                     controller: controllerEmail,
@@ -122,6 +124,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     maxLines: 1,
                                     minLines: 1,
                                     hintText: 'Email'),
+                                const SizedBox(height: 14),
+                                profileTextField(
+                                    controller: controllerAddress,
+                                    textInputType: TextInputType.text,
+                                    maxLines: 1,
+                                    minLines: 1,
+                                    hintText: 'Address'),
                                 const SizedBox(height: 14),
                                 TextFormField(
                                   validator: (value) {
@@ -234,7 +243,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                   ),
                                 ),
-                                const Spacer(),
+                                const SizedBox(height: 60),
                                 SizedBox(
                                   width: double.infinity,
                                   height: 40,
@@ -281,11 +290,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
