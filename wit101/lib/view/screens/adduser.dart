@@ -39,12 +39,12 @@ class _AddUserState extends State<AddUser> {
       body: Column(
         children: [
           banner(context),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 bottom: 20,
                 left: 20,
                 right: 20,
@@ -64,7 +64,7 @@ class _AddUserState extends State<AddUser> {
                 ),
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -101,112 +101,133 @@ class _AddUserState extends State<AddUser> {
                             ),
                           ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 14),
-                          width: 320,
-                          height: 50,
-                          child: TextFormField(
-                            controller: controllerUsername,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 14),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: TextFormField(
+                              controller: controllerUsername,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                hintText: 'Username',
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              hintText: 'Username',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500, fontSize: 12),
                             ),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 14),
-                          width: 320,
-                          height: 50,
-                          child: TextFormField(
-                            controller: controllerEmail,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 14),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: TextFormField(
+                              controller: controllerEmail,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                hintText: 'Email',
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              hintText: 'Email',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500, fontSize: 12),
                             ),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 14),
-                          width: 320,
-                          height: 50,
-                          child: TextFormField(
-                            controller: controllerPassword,
-                            obscureText: _showPassword,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 14),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: TextFormField(
+                              controller: controllerPassword,
+                              obscureText: _showPassword,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                filled: true,
+                                suffixIcon: IconButton(
+                                  icon: Icon(_showPassword
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                  onPressed: () {
+                                    _showPassword = !_showPassword;
+                                    setState(() {});
+                                  },
+                                ),
+                                hintText: "Password",
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              filled: true,
-                              suffixIcon: IconButton(
-                                icon: Icon(_showPassword
-                                    ? Icons.visibility_off
-                                    : Icons.visibility),
-                                onPressed: () {
-                                  _showPassword = !_showPassword;
-                                  setState(() {});
-                                },
-                              ),
-                              hintText: "Password",
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500, fontSize: 12),
                             ),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 14),
-                          width: 320,
-                          height: 50,
-                          child: TextFormField(
-                            controller: controllerAddress,
-                            decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 14),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: TextFormField(
+                              controller: controllerAddress,
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                hintText: 'Address',
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              hintText: 'Address',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500, fontSize: 12),
                             ),
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 14),
-                          width: 320,
-                          height: 60,
-                          child: dropdownMenu(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 14),
+                            width: MediaQuery.of(context).size.width,
+                            height: 60,
+                            child: dropdownMenu(),
+                          ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 62.48),
-                          width: 320,
-                          height: 50,
-                          child: buttonSave(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 62.48),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: buttonSave(),
+                          ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10.48),
-                          width: 320,
-                          height: 50,
-                          child: buttonCancel(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 10.48),
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            child: buttonCancel(),
+                          ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],
@@ -233,7 +254,7 @@ class _AddUserState extends State<AddUser> {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 20, top: 90),
+            padding: const EdgeInsets.only(left: 20, top: 90),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
