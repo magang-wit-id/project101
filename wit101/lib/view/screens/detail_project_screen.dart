@@ -25,7 +25,9 @@ class _DetailProjectScreenState extends State<DetailProjectScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: SvgPicture.asset('assets/svg/profile_back_icon.svg'),
           ),
         ),

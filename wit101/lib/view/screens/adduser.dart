@@ -252,7 +252,7 @@ class _AddUserState extends State<AddUser> {
           ),
           Container(
             alignment: Alignment.topRight,
-            child: Image.asset('assets/png/circle1.png'),
+            child: Image.asset('assets/png/circle_5.png'),
           ),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:wit101/view/screens/detail_project_screen.dart';
 import 'package:wit101/widgets/MyDrawer.dart';
 
 class projectlist extends StatefulWidget {
@@ -114,455 +115,472 @@ class CardListProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                color: Colors.white,
-              child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, )),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),), 
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child: Padding(padding: EdgeInsets.only(right: 15),
-                          child: Container( 
-                                    alignment: Alignment.bottomRight,
-                                    width: 65,
-                                    height: 30,
-                                 child: Container(
-                                  height: 25, 
-                                  width: 80,
-                                   child: Card( 
-                                    color: MyColors.lightBlue2(),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                    child: Center(child: PoppinsText.custom(text: 'Ongoing', fontSize: 8, warna: MyColors.lightBlue(), fontWeight: FontWeight.w600),),
-                                 ),)
-                                  ),
+    return GestureDetector( 
+       onTap: () {
+       Navigator.of(context).push(
+       PageRouteBuilder(pageBuilder:
+            ((context, animation,secondaryAnimation) {
+            return const DetailProjectScreen();
+        }), 
+        transitionsBuilder: (context,animation,secondaryAnimation,child) 
+        {
+                  final tween =Tween(begin: 0.0, end: 1.0);
+            return ScaleTransition(
+            scale: animation.drive(tween),
+              child: child,
+         );
+        }));
+                                    },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                  color: Colors.white,
+                child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, )),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),), 
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child: Padding(padding: EdgeInsets.only(right: 15),
+                            child: Container( 
+                                      alignment: Alignment.bottomRight,
+                                      width: 65,
+                                      height: 30,
+                                   child: Container(
+                                    height: 25, 
+                                    width: 80,
+                                     child: Card( 
+                                      color: MyColors.lightBlue2(),
+                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                      child: Center(child: PoppinsText.custom(text: 'Ongoing', fontSize: 8, warna: MyColors.lightBlue(), fontWeight: FontWeight.w600),),
+                                   ),)
+                                    ),
+                          ),
                         ),
-                      ),
-                    )
-              
-                  ],
-                ),
+                      )
                 
-              ),
-            ),
-            Container(
-             width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                 color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),), 
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child: Padding(padding: EdgeInsets.only(right: 15),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.green2(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+                    ],
+                  ),
+                  
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.only(top: 8)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-           Container(
+              Container(
                width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child:  Padding(padding: EdgeInsets.only(right: 15),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.green2(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                   color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),), 
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child: Padding(padding: EdgeInsets.only(right: 15),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.green2(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
                 ),
-                
               ),
-            ),
-            Container(
-              width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                 color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.darkGrey(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+            ],
+          ),
+          Padding(padding: EdgeInsets.only(top: 8)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             Container(
+                 width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                  color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.green2(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.only(top: 8)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-           Container(
-               width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child:  Padding(padding: EdgeInsets.only(right: 15),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.green2(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+              Container(
+                width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                   color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.darkGrey(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-            Container(
-              width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                 color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.darkGrey(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+            ],
+          ),
+          Padding(padding: EdgeInsets.only(top: 8)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             Container(
+                 width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                  color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.green2(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-          ],
-        ),  Padding(padding: EdgeInsets.only(top: 8)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-           Container(
-               width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child:  Padding(padding: EdgeInsets.only(right: 15),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.green2(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+              Container(
+                width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                   color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.darkGrey(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-            Container(
-              width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                 color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.darkGrey(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+            ],
+          ),  Padding(padding: EdgeInsets.only(top: 8)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             Container(
+                 width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                  color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.green2(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-          ],
-        ),  Padding(padding: EdgeInsets.only(top: 8)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-           Container(
-               width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child:  Padding(padding: EdgeInsets.only(right: 15),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.green2(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+              Container(
+                width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                   color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.darkGrey(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-            Container(
-              width: 151, 
-              height: 120,
-              child: Card(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
-                elevation: 10,
-                 color: Colors.white,
-                child: Column( 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                    Padding(padding: EdgeInsets.only(left: 15, top: 2),
-                    child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
-                     fontSize: 14, warna: MyColors.black(),
-                      fontWeight: FontWeight.w600),),  
-                    Padding(padding: EdgeInsets.only(top:  30)),
-                    Expanded(
-                      child: Align(
-                        alignment: FractionalOffset.bottomRight ,
-                        child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
-                            child: Container( 
-                                      alignment: Alignment.bottomRight,
-                                      width: 65,
-                                      height: 30,
-                                   child: Container(
-                                    height: 25, 
-                                    width: 80,
-                                     child: Card( 
-                                      color: MyColors.darkGrey(),
-                                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                      child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
-                                   ),)
-                                    ),
-                          ),
-                      ),
-                    )
-
-                  ],
+            ],
+          ),  Padding(padding: EdgeInsets.only(top: 8)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             Container(
+                 width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                  color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.green2(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Finished', fontSize: 8, warna: MyColors.green(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
                 ),
-                
               ),
-            ),
-          ],
-        ),
-      ],
+              Container(
+                width: 151, 
+                height: 120,
+                child: Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)) ,
+                  elevation: 10,
+                   color: Colors.white,
+                  child: Column( 
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
+                       fontSize: 14, warna: MyColors.black(),
+                        fontWeight: FontWeight.w600),),  
+                      Padding(padding: EdgeInsets.only(top:  30)),
+                      Expanded(
+                        child: Align(
+                          alignment: FractionalOffset.bottomRight ,
+                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                              child: Container( 
+                                        alignment: Alignment.bottomRight,
+                                        width: 65,
+                                        height: 30,
+                                     child: Container(
+                                      height: 25, 
+                                      width: 80,
+                                       child: Card( 
+                                        color: MyColors.darkGrey(),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                        child: Center(child: PoppinsText.custom(text: 'Not Started', fontSize: 8, warna: MyColors.lightGrey2(), fontWeight: FontWeight.w600),),
+                                     ),)
+                                      ),
+                            ),
+                        ),
+                      )
+    
+                    ],
+                  ),
+                  
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

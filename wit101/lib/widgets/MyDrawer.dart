@@ -46,8 +46,21 @@ class MyDrawer extends StatelessWidget {
            Padding(padding: EdgeInsets.only(top: 10,)),
            GestureDetector(
             onTap: (){
-              
-              Navigator.push(context, MaterialPageRoute(builder: ((context) => Dashboard())));
+               Navigator.of(context).push(
+                PageRouteBuilder(pageBuilder:
+                ((context, animation,secondaryAnimation) 
+                {
+                   return const Dashboard();}),
+               transitionsBuilder: (context, animation,secondaryAnimation,child) 
+               {
+                 
+                    return  SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(-0.7, 0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ); }));
             },
              child: Row(
                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,9 +92,22 @@ class MyDrawer extends StatelessWidget {
                        children: <Widget>[
                          SizedBox(height: 10,),
                          GestureDetector(
-                          onTap: (){ 
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> UserList()));
-                          },
+                             onTap: (){
+                       Navigator.of(context).push(
+                       PageRouteBuilder(pageBuilder:
+                              ((context, animation,secondaryAnimation) 
+                              {
+                                  return const UserList();}),
+                             transitionsBuilder: (context, animation,secondaryAnimation,child) 
+                              {
+                                return  SlideTransition(
+                            position: Tween<Offset>(
+                            begin: const Offset(-0.7, 0),
+                             end: Offset.zero,
+                               ).animate(animation),
+                                  child: child,
+                       ); }));
+            },
                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                              children: [
@@ -94,10 +120,23 @@ class MyDrawer extends StatelessWidget {
                           SizedBox(height: 10,),
                          GestureDetector(
                         
-                             onTap: (){ 
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> AddUser()));
-                          },
-            
+                               onTap: (){
+               Navigator.of(context).push(
+                PageRouteBuilder(pageBuilder:
+                ((context, animation,secondaryAnimation) 
+                {
+                   return const AddUser();}),
+               transitionsBuilder: (context, animation,secondaryAnimation,child) 
+               {
+                 
+                    return  SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(-0.7, 0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ); }));
+            },
                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                              children: [
@@ -143,11 +182,23 @@ class MyDrawer extends StatelessWidget {
                        children: <Widget>[
                          SizedBox(height: 10,),
                            GestureDetector(
-                            onTap: (){ 
-                              
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> projectlist()));
-                        
-                            },
+                              onTap: (){
+               Navigator.of(context).push(
+                PageRouteBuilder(pageBuilder:
+                ((context, animation,secondaryAnimation) 
+                {
+                   return const projectlist();}),
+               transitionsBuilder: (context, animation,secondaryAnimation,child) 
+               {
+                 
+                    return  SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(-0.7, 0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ); }));
+            },
                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                children: [
@@ -159,9 +210,23 @@ class MyDrawer extends StatelessWidget {
                            ),
                             SizedBox(height: 10,),
                            GestureDetector( 
-                            onTap: (){ 
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> addproject()));
-                          },
+                              onTap: (){
+               Navigator.of(context).push(
+                PageRouteBuilder(pageBuilder:
+                ((context, animation,secondaryAnimation) 
+                {
+                   return const addproject();}),
+               transitionsBuilder: (context, animation,secondaryAnimation,child) 
+               {
+                 
+                    return  SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(-0.7, 0),
+                  end: Offset.zero,
+                ).animate(animation),
+                child: child,
+              ); }));
+            },
                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                children: [

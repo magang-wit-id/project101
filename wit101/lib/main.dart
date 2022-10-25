@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wit101/view/screens/dashboard.dart';
 import 'package:wit101/view/screens/detail_project_screen.dart';
 
 void main() {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const DetailProjectScreen(),
+      home: const Dashboard(),
     );
   }
 }
