@@ -3,25 +3,25 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/widgets/MyDrawer.dart';
+import 'package:wit101/widgets/drawer_screen.dart';
 
-class addproject extends StatefulWidget {
-  const addproject({Key? key}) : super(key: key);
+class Addproject extends StatefulWidget {
+  const Addproject({Key? key}) : super(key: key);
 
   @override
-  State<addproject> createState() => _addprojectState();
+  State<Addproject> createState() => _AddprojectState();
 }
 
-class _addprojectState extends State<addproject> {
-  var ProjectnameController = TextEditingController();
+class _AddprojectState extends State<Addproject> {
+  var projectnameController = TextEditingController();
 
-  var DealPriceController = TextEditingController();
+  var dealPriceController = TextEditingController();
 
-  var DurationController = TextEditingController();
+  var durationController = TextEditingController();
 
   var workerController = TextEditingController();
 
-  bool _showPassword = true;
+  bool showPassword = true;
 
   String selectedValue = 'Position';
 
@@ -45,7 +45,7 @@ class _addprojectState extends State<addproject> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(bottom: 20, left: 10,right: 10),
+              padding: const EdgeInsets.only(bottom: 20, left: 10,right: 10),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -58,13 +58,13 @@ class _addprojectState extends State<addproject> {
                     ),
                   ],
                 ),
-                child: Padding(padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                      Padding(
-                         padding: EdgeInsets.only( left: 55, right: 55), 
+                         padding: const EdgeInsets.only( left: 55, right: 55), 
                          child: SizedBox(
                          height: 200, 
                          width: 150,
@@ -73,12 +73,12 @@ class _addprojectState extends State<addproject> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [ 
-                       Container(
+                       SizedBox(
                       width: 320,
                       height: 50,
                       child: TextFormField(
                         autofocus: true,
-                        controller: ProjectnameController,
+                        controller: projectnameController,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -103,7 +103,7 @@ class _addprojectState extends State<addproject> {
                         width: 320,
                         height: 50,
                         child: TextFormField(
-                          controller: DealPriceController,
+                          controller: dealPriceController,
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -126,7 +126,7 @@ class _addprojectState extends State<addproject> {
                         height: 50,
                         child: TextFormField(
                           keyboardType: TextInputType.number,
-                          controller: DurationController,
+                          controller: durationController,
                           decoration: InputDecoration(
                             focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -168,21 +168,21 @@ class _addprojectState extends State<addproject> {
                               fontWeight: FontWeight.w500, fontSize: 12),
                         ),
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 25)),
-                      Container(
+                      const Padding(padding: EdgeInsets.only(bottom: 25)),
+                      SizedBox(
                     
                         width: 320,
                         height: 50,
                         child: buttonSave(),
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 10)),
-                      Container(
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      SizedBox(
               
                         width: 320,
                         height: 50,
                         child: buttonCancel(),
                       ),
-                      Padding(padding: EdgeInsets.only(bottom: 20))
+                      const Padding(padding: EdgeInsets.only(bottom: 20))
                         ],
                       ),
                     ),
@@ -209,7 +209,7 @@ class _addprojectState extends State<addproject> {
       height: 154,
       child: Stack(
         children: [
-          Padding( padding: EdgeInsets.only(top: 84, left: 45),
+          Padding( padding: const EdgeInsets.only(top: 84, left: 45),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

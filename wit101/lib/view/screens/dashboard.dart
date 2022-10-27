@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/widgets/MyDrawer.dart';
+import 'package:wit101/widgets/drawer_screen.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey =
+         GlobalKey<ScaffoldState>();
     return Scaffold(
       extendBodyBehindAppBar: true,
-      key: _scaffoldKey,
+      key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -26,11 +26,11 @@ class Dashboard extends StatelessWidget {
             cardDashboard(),
             Container(
               alignment: Alignment.topCenter,
-              padding: EdgeInsets.only(top: 267),
+              padding: const EdgeInsets.only(top: 267),
               child: Column(
                 children: [
                   income(),
-                  SizedBox(height: 18,),
+                  const SizedBox(height: 18,),
                   revenue(),
                 ],
               ),

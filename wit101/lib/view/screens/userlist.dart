@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/widgets/MyDrawer.dart';
+import 'package:wit101/widgets/drawer_screen.dart';
 
 class UserList extends StatefulWidget {
   const UserList({Key? key}) : super(key: key);
@@ -19,14 +19,14 @@ class _UserListState extends State<UserList> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Column(
         children: [
           Stack(
             children: [
               banner(),
               Container(
-                padding: EdgeInsets.only(top: 130, left: 10, right: 10),
+                padding: const EdgeInsets.only(top: 130, left: 10, right: 10),
                 alignment: Alignment.center,
                 child: searchView(),
               ),
@@ -75,7 +75,7 @@ class _UserListState extends State<UserList> {
   }
 
   Widget searchView() {
-    return Container(
+    return SizedBox(
       height: 50,
       child: TextField(
         decoration: InputDecoration(

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/view/screens/detail_project_screen.dart';
-import 'package:wit101/widgets/MyDrawer.dart';
+import 'package:wit101/widgets/drawer_screen.dart';
 
-class projectlist extends StatefulWidget {
-  const projectlist({Key? key}) : super(key: key);
+class Projectlist extends StatefulWidget {
+  const Projectlist({Key? key}) : super(key: key);
 
   @override
-  State<projectlist> createState() => _projectlistState();
+  State<Projectlist> createState() => _ProjectlistState();
 }
  
-class _projectlistState extends State<projectlist> {
-  TextEditingController SearchController = new TextEditingController();
+class _ProjectlistState extends State<Projectlist> {
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class _projectlistState extends State<projectlist> {
           const SizedBox(
             height: 40,
           ),
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(child: CardListProject())
           ),
         ],
@@ -64,11 +64,11 @@ class _projectlistState extends State<projectlist> {
           Positioned(
             top: 130,
             left: 10,
-            child: Container(
+            child: SizedBox(
               height: 50,
               width:MediaQuery.of(context).size.width,
               child: Padding(
-                padding: EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 20),
                 child: searchView()),
             ),
           )
@@ -79,11 +79,11 @@ class _projectlistState extends State<projectlist> {
 
   Widget searchView() {
     return TextField( 
-      controller: SearchController,
+      controller: searchController,
       decoration: InputDecoration(
         
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        suffixIcon: Icon(Icons.search),
+        suffixIcon: const Icon(Icons.search),
         hintText: 'Search',
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -137,7 +137,7 @@ class CardListProject extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
+              SizedBox(
                 width: 151, 
                 height: 120,
                 child: Card(
@@ -147,20 +147,20 @@ class CardListProject extends StatelessWidget {
                 child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, )),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, )),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),), 
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child: Padding(padding: EdgeInsets.only(right: 15),
+                          child: Padding(padding: const EdgeInsets.only(right: 15),
                             child: Container( 
                                       alignment: Alignment.bottomRight,
                                       width: 65,
                                       height: 30,
-                                   child: Container(
+                                   child: SizedBox(
                                     height: 25, 
                                     width: 80,
                                      child: Card( 
@@ -178,7 +178,7 @@ class CardListProject extends StatelessWidget {
                   
                 ),
               ),
-              Container(
+              SizedBox(
                width: 151, 
                 height: 120,
                 child: Card(
@@ -188,21 +188,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),), 
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child: Padding(padding: EdgeInsets.only(right: 15),
+                          child: Padding(padding: const EdgeInsets.only(right: 15),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -221,11 +221,11 @@ class CardListProject extends StatelessWidget {
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.only(top: 8)),
+          const Padding(padding: EdgeInsets.only(top: 8)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             Container(
+             SizedBox(
                  width: 151, 
                 height: 120,
                 child: Card(
@@ -235,21 +235,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                          child:  Padding(padding: const EdgeInsets.only(right: 15),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -267,7 +267,7 @@ class CardListProject extends StatelessWidget {
                   
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 151, 
                 height: 120,
                 child: Card(
@@ -277,21 +277,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                          child: Padding(padding: const EdgeInsets.only(right: 15, bottom : 3),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -311,11 +311,11 @@ class CardListProject extends StatelessWidget {
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.only(top: 8)),
+          const Padding(padding: EdgeInsets.only(top: 8)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             Container(
+             SizedBox(
                  width: 151, 
                 height: 120,
                 child: Card(
@@ -325,21 +325,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                          child:  Padding(padding: const EdgeInsets.only(right: 15),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -357,7 +357,7 @@ class CardListProject extends StatelessWidget {
                   
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 151, 
                 height: 120,
                 child: Card(
@@ -367,21 +367,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                          child: Padding(padding: const EdgeInsets.only(right: 15, bottom : 3),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -400,11 +400,11 @@ class CardListProject extends StatelessWidget {
                 ),
               ),
             ],
-          ),  Padding(padding: EdgeInsets.only(top: 8)),
+          ),  const Padding(padding: EdgeInsets.only(top: 8)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             Container(
+             SizedBox(
                  width: 151, 
                 height: 120,
                 child: Card(
@@ -414,21 +414,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                          child:  Padding(padding: const EdgeInsets.only(right: 15),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -446,7 +446,7 @@ class CardListProject extends StatelessWidget {
                   
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 151, 
                 height: 120,
                 child: Card(
@@ -456,21 +456,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                          child: Padding(padding: const EdgeInsets.only(right: 15, bottom : 3),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -489,11 +489,11 @@ class CardListProject extends StatelessWidget {
                 ),
               ),
             ],
-          ),  Padding(padding: EdgeInsets.only(top: 8)),
+          ),  const Padding(padding: EdgeInsets.only(top: 8)),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-             Container(
+             SizedBox(
                  width: 151, 
                 height: 120,
                 child: Card(
@@ -503,21 +503,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child:  Padding(padding: EdgeInsets.only(right: 15),
+                          child:  Padding(padding: const EdgeInsets.only(right: 15),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 
@@ -535,7 +535,7 @@ class CardListProject extends StatelessWidget {
                   
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 151, 
                 height: 120,
                 child: Card(
@@ -545,21 +545,21 @@ class CardListProject extends StatelessWidget {
                   child: Column( 
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 8, left: 10)),
-                      Padding(padding: EdgeInsets.only(left: 15, top: 2),
+                      const Padding(padding: EdgeInsets.only(top: 8, left: 10)),
+                      Padding(padding: const EdgeInsets.only(left: 15, top: 2),
                       child:  PoppinsText.custom(text: 'Fradricast fuck yeh yeh' ,
                        fontSize: 14, warna: MyColors.black(),
                         fontWeight: FontWeight.w600),),  
-                      Padding(padding: EdgeInsets.only(top:  30)),
+                      const Padding(padding: EdgeInsets.only(top:  30)),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomRight ,
-                          child: Padding(padding: EdgeInsets.only(right: 15, bottom : 3),
+                          child: Padding(padding: const EdgeInsets.only(right: 15, bottom : 3),
                               child: Container( 
                                         alignment: Alignment.bottomRight,
                                         width: 65,
                                         height: 30,
-                                     child: Container(
+                                     child: SizedBox(
                                       height: 25, 
                                       width: 80,
                                        child: Card( 

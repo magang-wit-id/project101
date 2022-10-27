@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
-import 'package:wit101/widgets/MyDrawer.dart';
+import 'package:wit101/widgets/drawer_screen.dart';
 
 class AddUser extends StatefulWidget {
   const AddUser({Key? key}) : super(key: key);

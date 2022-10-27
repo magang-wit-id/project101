@@ -1,12 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wit101/view/screens/dashboard.dart';
+import 'package:wit101/firebase_options.dart';
+import 'package:wit101/view/screens/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive,
+        overlays: [SystemUiOverlay.bottom]);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) => runApp(
       const MyApp(),
@@ -24,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const Dashboard(),
+      home: const LoginScreen(),
     );
   }
 }

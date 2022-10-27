@@ -37,13 +37,13 @@ class MyColors {
     return const Color(0xFFF6C23E);
   }
   static green2() {
-    return Color.fromARGB(255, 223, 255, 243);
+    return const Color.fromARGB(255, 223, 255, 243);
   }
  static lightGrey2() {
-    return Color.fromARGB(255, 235, 235, 235);
+    return const Color.fromARGB(255, 235, 235, 235);
   }
 static lightBlue2() {
-    return Color.fromARGB(255, 217, 248, 253);
+    return const Color.fromARGB(255, 217, 248, 253);
   }
 
 }
