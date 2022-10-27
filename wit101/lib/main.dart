@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wit101/view/screens/dashboard.dart';
-import 'package:wit101/view/screens/detail_project_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
