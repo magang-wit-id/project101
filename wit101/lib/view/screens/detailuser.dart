@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
@@ -5,7 +6,8 @@ import 'package:wit101/utility/warna.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DetailUser extends StatefulWidget {
-  const DetailUser({Key? key}) : super(key: key);
+  final DocumentSnapshot post;
+  const DetailUser({super.key, required this.post});
 
   @override
   State<DetailUser> createState() => _DetailUserState();

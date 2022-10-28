@@ -1,22 +1,32 @@
+import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DB {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final db = FirebaseFirestore.instance;
 
-  get user => _auth.currentUser;
-
-//SIGN UP METHOD
-  Future<String?> signUp({required String email, required String password}) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return null;
-    } on FirebaseAuthException catch (e) {
-      return e.message;
-    }
+  //update user no imng
+  Future<void> updateUser({
+    required String uid,
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+    required String alamat,
+  }) {
+    return db
+        .collection("bd_userdata")
+        .doc(uid)
+        .update({
+          'name': name,
+          'email': email,
+          'password': password,
+          'role': role,
+          'alamat': alamat,
+        })
+        .then(
+          (value) => log("User Updated"),
+        )
+        .catchError((error) => log("Failed to update user: $error"));
   }
-
 }

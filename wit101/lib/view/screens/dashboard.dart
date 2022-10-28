@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
@@ -8,37 +10,73 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> scaffoldKey =
-         GlobalKey<ScaffoldState>();
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      drawer: const MyDrawer(),
-      body: SingleChildScrollView(
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            banner(context),
-            cardDashboard(),
-            Container(
-              alignment: Alignment.topCenter,
-              padding: const EdgeInsets.only(top: 267),
-              child: Column(
-                children: [
-                  income(),
-                  const SizedBox(height: 18,),
-                  revenue(),
-                ],
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('bd_userdata')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .snapshots(),
+        builder: (context, snapshots) {
+          var data = snapshots.data;
+          if ((snapshots.connectionState == ConnectionState.waiting)) {
+            return const Center();
+          } else {
+            return Scaffold(
+              extendBodyBehindAppBar: true,
+              key: scaffoldKey,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+              drawer: const MyDrawer(),
+              body: SingleChildScrollView(
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 141,
+                      decoration: BoxDecoration(
+                        color: MyColors.red(),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(16),
+                          bottomRight: Radius.circular(16),
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            right: 13,
+                            top: 50,
+                            child: PoppinsText.custom(
+                                text: 'Welcome, ${data!['name']}',
+                                fontSize: 16,
+                                warna: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    ),
+                    cardDashboard(),
+                    Container(
+                      alignment: Alignment.topCenter,
+                      padding: const EdgeInsets.only(top: 267),
+                      child: Column(
+                        children: [
+                          income(),
+                          const SizedBox(
+                            height: 18,
+                          ),
+                          revenue(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        });
   }
 
   Widget banner(BuildContext context) {
@@ -58,7 +96,7 @@ class Dashboard extends StatelessWidget {
             right: 13,
             top: 50,
             child: PoppinsText.custom(
-                text: 'Welcome, Admin',
+                text: 'Welcome, ',
                 fontSize: 16,
                 warna: Colors.white,
                 fontWeight: FontWeight.w700),
