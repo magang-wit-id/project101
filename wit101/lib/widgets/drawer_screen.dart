@@ -27,9 +27,7 @@ class MyDrawer extends StatelessWidget {
             .snapshots(),
         builder: (context, snapshots) {
           var data = snapshots.data;
-          if ((snapshots.connectionState == ConnectionState.waiting)) {
-            return const Center();
-          } else {
+          String? imgeGet = data?['img'];
             return Drawer(
               child: Stack(
                 children: [
@@ -63,7 +61,7 @@ class MyDrawer extends StatelessWidget {
                                 child: CircleAvatar(
                                   radius: 35.0,
                                   backgroundColor: Colors.white,
-                                  backgroundImage: NetworkImage(data!['img']),
+                                  backgroundImage: NetworkImage(imgeGet.toString())
                                 ),
                               ),
                               Container(
@@ -72,7 +70,7 @@ class MyDrawer extends StatelessWidget {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: PoppinsText.custom(
-                                      text: data['name'],
+                                      text: '${data?['name']}',
                                       fontSize: 16,
                                       warna: Colors.white,
                                       fontWeight: FontWeight.w700),
@@ -501,7 +499,7 @@ class MyDrawer extends StatelessWidget {
                 ],
               ),
             );
-          }
+          
         });
   }
 }

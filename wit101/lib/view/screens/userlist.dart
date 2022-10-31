@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/widgets/drawer_screen.dart';
+
+import 'detailuser.dart';
 
 class UserList extends StatefulWidget {
   const UserList({Key? key}) : super(key: key);
@@ -11,10 +14,43 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList> {
+  var controlerpass = TextEditingController();
+
+  toDetail(DocumentSnapshot post) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => DetailUser(post: post)));
+  }
+
+  Future<QuerySnapshot>? postDocumentList;
+  String userNameText = "";
+
+  initSearchPost(String textEntered) {
+    if (controlerpass.text.isEmpty){
+      postDocumentList = FirebaseFirestore.instance
+        .collection('bd_userdata')
+        
+        .get();
+
+    setState(() {
+      postDocumentList;
+    });
+    }else if (controlerpass.text.isNotEmpty){
+      postDocumentList = FirebaseFirestore.instance
+        .collection('bd_userdata')
+        .where("name", isEqualTo: controlerpass.text)
+        .get();
+
+    setState(() {
+      postDocumentList;
+    });
+    }
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -36,8 +72,49 @@ class _UserListState extends State<UserList> {
             height: 10,
           ),
           Expanded(
-            child: listUser(),
-          ),
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('bd_userdata')
+                       .where("name", isEqualTo: controlerpass.text)
+                      .snapshots(),
+                  builder: (context, snapshots) {
+                    return (snapshots.connectionState ==
+                            ConnectionState.waiting)
+                        ? const Center()
+                        : ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            itemCount: snapshots.data?.docs.length,
+                            itemBuilder: (context, index) {
+                              var data = snapshots.data?.docs[index];
+
+                              return SizedBox(
+                                width: 360,
+                                height: 70,
+                                child: GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
+                                  onTap: () {
+                                    toDetail(snapshots.data!.docs[index]);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage:
+                                            NetworkImage(data?['img']),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      PoppinsText.custom(
+                                          text: data?['name'],
+                                          fontSize: 15,
+                                          warna: MyColors.black(),
+                                          fontWeight: FontWeight.w500),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                  })),
         ],
       ),
     );
@@ -66,9 +143,11 @@ class _UserListState extends State<UserList> {
           ),
           Container(
             alignment: Alignment.topRight,
-            child: Image.asset('assets/png/circle_5.png', alignment: Alignment.topRight,),
+            child: Image.asset(
+              'assets/png/circle_5.png',
+              alignment: Alignment.topRight,
+            ),
           ),
-
         ],
       ),
     );
@@ -77,9 +156,22 @@ class _UserListState extends State<UserList> {
   Widget searchView() {
     return SizedBox(
       height: 50,
-      child: TextField(
+      child: TextFormField(
+        onChanged: (textEntered) {
+          setState(() {
+            userNameText = textEntered;
+          });
+          initSearchPost(textEntered);
+        },
+        controller: controlerpass,
         decoration: InputDecoration(
-          suffixIcon: const Icon(Icons.search),
+          // ignore: prefer_const_constructors
+          suffixIcon: IconButton(
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              initSearchPost(userNameText);
+            },
+          ),
           hintText: 'Search',
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
@@ -100,32 +192,5 @@ class _UserListState extends State<UserList> {
         ),
       ),
     );
-  }
-
-  Widget listUser() {
-    return ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics()),
-        padding: const EdgeInsets.symmetric(horizontal: 30),
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int index) {
-          return SizedBox(
-            width: 360,
-            height: 70,
-            child: Row(
-              children: [
-                Image.asset('assets/png/profile2.png'),
-                const SizedBox(
-                  width: 20,
-                ),
-                PoppinsText.custom(
-                    text: 'Admin',
-                    fontSize: 15,
-                    warna: MyColors.black(),
-                    fontWeight: FontWeight.w500),
-              ],
-            ),
-          );
-        });
   }
 }

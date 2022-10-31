@@ -1,6 +1,14 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 import 'package:wit101/utility/poppins_text.dart';
+import 'package:wit101/view/proses/fire_store.dart';
 import 'package:wit101/widgets/drawer_screen.dart';
 
 class AddUser extends StatefulWidget {
@@ -15,8 +23,6 @@ class _AddUserState extends State<AddUser> {
 
   var controllerEmail = TextEditingController();
 
-  var controllerUsername = TextEditingController();
-
   var controllerPassword = TextEditingController();
 
   var controllerAddress = TextEditingController();
@@ -27,8 +33,70 @@ class _AddUserState extends State<AddUser> {
 
   var items = ['Position', 'Admin', 'Market', 'Account Management'];
 
+  String uid = const Uuid().v4();
+
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        log('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        log('No image selected.');
+      }
+    });
+  }
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+
+    try {
+      final ref = FirebaseStorage.instance.ref('user').child("$uid.jpg");
+      await ref.putFile(_photo!);
+      final storageRef = FirebaseStorage.instance.ref('user');
+      final imageUrl = await storageRef.child("$uid.jpg").getDownloadURL();
+      FirebaseFirestore.instance
+          .collection('bd_userdata')
+          .doc(uid)
+          .update({
+            'img': imageUrl,
+          })
+          .then(
+            (value) => const SnackBar(content: Text("User Updated")),
+          )
+          .catchError(
+            (error) => SnackBar(content: Text("Failed to update user: $error")),
+          );
+    } catch (e) {
+      log('error occured');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    var name = controllerName.text;
+    var email = controllerEmail.text;
+    var password = controllerPassword.text;
+    var alamat = controllerAddress.text;
+    var role = selectedValue.toString();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -108,7 +176,7 @@ class _AddUserState extends State<AddUser> {
                             width: MediaQuery.of(context).size.width,
                             height: 50,
                             child: TextFormField(
-                              controller: controllerUsername,
+                              controller: controllerName,
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
@@ -116,7 +184,7 @@ class _AddUserState extends State<AddUser> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                hintText: 'Username',
+                                hintText: 'Name',
                               ),
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w500, fontSize: 12),
@@ -215,7 +283,30 @@ class _AddUserState extends State<AddUser> {
                             margin: const EdgeInsets.only(top: 62.48),
                             width: MediaQuery.of(context).size.width,
                             height: 50,
-                            child: buttonSave(),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                DB().addUser(
+                                    uid: uid,
+                                    name: name,
+                                    email: email,
+                                    password: password,
+                                    role: role,
+                                    alamat: alamat);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromRGBO(232, 23, 31, 1),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              child: Text(
+                                'Save',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white),
+                              ),
+                            ),
                           ),
                         ),
                         Padding(
@@ -333,7 +424,10 @@ class _AddUserState extends State<AddUser> {
               SizedBox(
                 width: 80,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
                   child: Column(
                     children: const [
                       Icon(Icons.camera),
@@ -345,7 +439,10 @@ class _AddUserState extends State<AddUser> {
               SizedBox(
                 width: 80,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    imgFromGallery();
+                    Navigator.of(context).pop();
+                  },
                   child: Column(
                     children: const [
                       Icon(Icons.photo_album),
@@ -385,21 +482,6 @@ class _AddUserState extends State<AddUser> {
                 selectedValue = newValue!;
               });
             }),
-      ),
-    );
-  }
-
-  Widget buttonSave() {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromRGBO(232, 23, 31, 1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-      child: Text(
-        'Save',
-        style: GoogleFonts.poppins(
-            fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
       ),
     );
   }

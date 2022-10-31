@@ -261,7 +261,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           Padding(
                                             padding: const EdgeInsets.only(
                                               top: 25,
-                                              bottom: 25,
+                                              bottom: 1,
                                               left: 27,
                                               right: 24,
                                             ),
@@ -270,8 +270,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                              top: 19,
-                                              bottom: 19,
+                                              top: 12,
+                                              bottom: 2
+                                              
                                             ),
                                             child: Column(
                                               crossAxisAlignment:
@@ -283,12 +284,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     warna: MyColors.black(),
                                                     fontWeight:
                                                         FontWeight.w600),
-                                                PoppinsText.custom(
-                                                    text: data['id_user'],
-                                                    fontSize: 13,
-                                                    warna: MyColors.darkGrey(),
-                                                    fontWeight:
-                                                        FontWeight.w600),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 5, ),
+                                                  width: 231,
+                                                  child: PoppinsText.custom(
+                                                      text: data['id_user'],
+                                                      fontSize: 14,
+                                                      warna:
+                                                          MyColors.darkGrey(),
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                )
                                               ],
                                             ),
                                           ),

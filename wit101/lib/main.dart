@@ -6,6 +6,9 @@ import 'package:wit101/view/screens/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+  };
   Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

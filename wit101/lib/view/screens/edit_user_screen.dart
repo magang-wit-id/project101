@@ -8,19 +8,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/view/proses/auth.dart';
 import 'package:wit101/view/proses/fire_store.dart';
-import 'package:wit101/view/screens/profile_screen.dart';
+import 'package:wit101/view/screens/detailuser.dart';
 
-class EditProfileScreen extends StatefulWidget {
+class EditUserScreen extends StatefulWidget {
   final DocumentSnapshot post;
-  const EditProfileScreen({super.key, required this.post});
+  const EditUserScreen({super.key, required this.post});
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<EditUserScreen> createState() => _EditUserScreenState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _EditUserScreenState extends State<EditUserScreen> {
   final _formKey = GlobalKey<FormState>();
   var controllerID = TextEditingController();
   var controllerName = TextEditingController();
@@ -34,6 +33,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   File? _photo;
   final ImagePicker _picker = ImagePicker();
+
+  toDetail(DocumentSnapshot post) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => DetailUser(post: post)));
+  }
 
   Future imgFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -104,9 +108,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     var name = controllerName.text;
     var alamat = controllerAddress.text;
     var role = dropdownPick;
-
-    //cerdenalitas
-    var setPassword = widget.post.get("password");
 
     return StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -355,25 +356,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         height: 40,
                                         child: ElevatedButton(
                                           onPressed: () async {
-                                            Auth()
-                                                .userChanges(
+                                            DB()
+                                                .updateUser(
+                                                    uid: uid,
+                                                    name: name,
                                                     email: controllerEmail.text,
-                                                    password: controllerPass.text,
-                                                    setPassword: setPassword)
-                                                .then((value) => DB()
-                                                    .updateUser(
-                                                        uid: uid,
-                                                        name: name,
-                                                        email: controllerEmail.text,
-                                                        password: controllerPass.text,
-                                                        role: role.toString(),
-                                                        alamat: alamat))
-                                                .whenComplete(() =>
-                                                    Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const ProfileScreen())));
+                                                    password:
+                                                        controllerPass.text,
+                                                    role: role.toString(),
+                                                    alamat: alamat)
+                                                .whenComplete(() =>  Navigator.pop(context));
                                           },
                                           child: PoppinsText.custom(
                                               text: 'Save',

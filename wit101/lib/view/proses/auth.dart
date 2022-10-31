@@ -83,8 +83,17 @@ class Auth {
   Future<String?> userChanges(
       {required String email,
       required String password,
-      required String setEmail,
       required String setPassword}) async {
+        user.updatePassword(password).then((_) {
+                FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                  if (user == null) {
+                    log('User is currently signed out!');
+                  } else {
+                    log('User password update');
+                  }
+                });
+                log("User password update");
+                });
     try {
       final emailChange = EmailAuthProvider.credential(
           email: _auth.currentUser!.email.toString(), password: setPassword);
@@ -95,25 +104,17 @@ class Auth {
             if (user == null) {
               log('User is currently signed out!');
             } else {
-              user.updatePassword(password).then((_) {
-                FirebaseAuth.instance.authStateChanges().listen((User? user) {
-                  if (user == null) {
-                    log('User is currently signed out!');
-                  } else {
-                    log('User is signed in!');
-                  }
-                });
-                log("Berhasil ppp");
-              });
-              log('User is signed in!');
+              log('User email update');
             }
           });
-          log("Berhasil Email");
+          log("User email update Succes");
         });
       });
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
+
+    
     return null;
   }
 }
