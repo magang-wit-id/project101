@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wit101/model/model%20Class/user_model.dart';
 import 'package:wit101/utility/poppins_text.dart';
-import 'package:wit101/view/proses/fire_store.dart';
 import 'package:wit101/widgets/drawer_screen.dart';
 
 class AddUser extends StatefulWidget {

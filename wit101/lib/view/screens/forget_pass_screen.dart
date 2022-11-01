@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/view/proses/auth.dart';
+import 'package:wit101/view/model/Model%20Api/auth_model.dart';
 import 'login_screen.dart';
 
 class ForgetPassScreen extends StatefulWidget {
