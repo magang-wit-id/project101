@@ -8,7 +8,6 @@ import 'package:wit101/utility/warna.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wit101/view/proses/fire_store.dart';
 import 'package:wit101/view/screens/edit_user_screen.dart';
-import 'package:wit101/view/screens/userlist.dart';
 
 class DetailUser extends StatefulWidget {
   final DocumentSnapshot post;

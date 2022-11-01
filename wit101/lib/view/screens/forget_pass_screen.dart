@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wit101/utility/poppins_text.dart';
@@ -13,6 +14,7 @@ class ForgetPassScreen extends StatefulWidget {
 }
 
 class _ForgetPassScreenState extends State<ForgetPassScreen> {
+  final formKey = GlobalKey<FormState>();
   final controllerEmail = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
 
   Form formforget(BuildContext context) {
     return Form(
+      key: formKey,
       child: Column(
         children: [
           SizedBox(
@@ -56,7 +59,35 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
                       color: MyColors.black(),
                     ),
                   ),
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: const BorderSide(
+                      color: Colors.red,
+                    ),
+                  ),
+                  focusedErrorBorder: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    borderSide: BorderSide(
+                      width: 1,
+                      color: Colors.red,
+                    ),
+                  ),
                 ),
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    
+                    return "Email can not be empty";
+                  } else if (!EmailValidator.validate(val, true)) {
+                    return "Invalid Email Address";
+                  } else {
+                    BorderRadius.circular(5);
+                    return null;
+                  }
+                },
+                onChanged: (val) {
+                  formKey.currentState!.validate();
+                },
+
               )),
           const Padding(
             padding: EdgeInsets.only(top: 6),
@@ -72,7 +103,8 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
                         MaterialStateProperty.all<Color>(MyColors.red()),
                   ),
                   onPressed: () {
-                    Auth().sendPass(email: controllerEmail.text).then((result) {
+                    if(formKey.currentState!.validate()){
+                      Auth().sendPass(email: controllerEmail.text).then((result) {
                       if (result == null) {
                         Navigator.pushReplacement(
                             context,
@@ -87,6 +119,8 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
                         ));
                       }
                     });
+                    }
+                    
                   },
                   child: PoppinsText.custom(
                       text: 'Send To Email',

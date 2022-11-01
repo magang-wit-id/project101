@@ -7,6 +7,7 @@ import 'package:wit101/view/screens/dashboard.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/view/screens/forget_pass_screen.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   final controllerEmail = TextEditingController();
   final controllerPassword = TextEditingController();
   bool passHide = true;
@@ -45,6 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,12 +101,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return 'Please fill in this field';
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    
+                    return "Email can not be empty";
+                  } else if (!EmailValidator.validate(val, true)) {
+                    return "Invalid Email Address";
+                  } else {
+                    BorderRadius.circular(5);
+                    return null;
                   }
-                  BorderRadius.circular(5);
-                  return null;
+                },
+                onChanged: (val) {
+                  formKey.currentState!.validate();
                 },
               ),
             ),
@@ -160,12 +169,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             passHide = !passHide;
                           });
                         })),
-                validator: (text) {
-                  if (text == null || text.isEmpty) {
-                    return 'Please fill in this field';
+                validator: (val) {
+                  if (val == null || val.isEmpty) {
+                    return 'can not be empty';
                   }
                   BorderRadius.circular(5);
                   return null;
+                },
+                onChanged: (val) {
+                  formKey.currentState!.validate();
                 },
               ),
             ),
@@ -277,4 +289,7 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
     );
   }
+
+ 
+  
 }
