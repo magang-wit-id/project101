@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import 'package:wit101/model/model%20Class/price_model.dart';
+import 'package:wit101/model/view_model/price_model.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:google_fonts/google_fonts.dart';
