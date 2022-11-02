@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wit101/model/Model%20Api/auth_model.dart';
+import 'package:wit101/model/model_api/auth_model.dart';
 import 'package:wit101/view/screens/dashboard.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';

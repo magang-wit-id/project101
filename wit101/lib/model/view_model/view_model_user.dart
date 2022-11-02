@@ -1,9 +1,11 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class DB {
+class DB_User {
   final db = FirebaseFirestore.instance.collection("bd_userdata");
 
   //update user no imng

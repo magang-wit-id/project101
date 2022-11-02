@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wit101/model/Model%20Api/api_model.dart';
+import 'package:wit101/model/model_api/api_model.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/view/screens/projectlist.dart';
@@ -238,27 +238,10 @@ class _AddprojectState extends State<Addproject> {
   }
 
   Widget buttonSave() {
-    ProciderProject myprovider = Provider.of<ProciderProject>(context);
+
     return ElevatedButton(
-      onPressed: () {
-        myprovider.tambahproject(
-          projectname: projectnameController.text,
-          dealprice: int.parse(dealPriceController.text),
-          duration: durationController.text,
-          worker: int.parse(workerController.text),
-        );
-        Navigator.of(context).push(PageRouteBuilder(
-            pageBuilder: ((context, animation, secondaryAnimation) {
-          return const Projectlist();
-        }), transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-          final tween = Tween(begin: 0.0, end: 1.0);
-          return ScaleTransition(
-            scale: animation.drive(tween),
-            child: child,
-          );
-        }));
-      },
+      onPressed: (){
+                                           },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromRGBO(232, 23, 31, 1),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

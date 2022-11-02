@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wit101/model/model%20Class/user_model.dart';
+import 'package:wit101/model/view_model/view_model_user.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -407,7 +407,7 @@ class _DetailUserState extends State<DetailUser> {
                                     const Spacer(),
                                     ElevatedButton(
                                       onPressed: () {
-                                        DB().deleteUser(uuid: uuid).then((value) => Navigator.pop(context));
+                                        DB_User().deleteUser(uuid: uuid).then((value) => Navigator.pop(context));
                                       },
                                       child: PoppinsText.custom(
                                           text: 'Delete Account',

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wit101/firebase_options.dart';
-import 'package:wit101/model/Model%20Api/api_model.dart';
+import 'package:wit101/model/view_model/view_model_project.dart';
 import 'package:wit101/view/screens/login_screen.dart';
 
 void main() {
@@ -31,16 +31,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => ProciderProject()),
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-          ),
-          home: const LoginScreen(),
-        ));
+      return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=> DB_Project()),
+        
+
+
+      ],child: MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: const LoginScreen(),
+    ));
   }
 }
