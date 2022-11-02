@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:wit101/model/model%20Class/user_model.dart';
+import 'package:wit101/model/model_api/auth_model.dart';
+import 'package:wit101/model/view_model/view_model_user.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/view/model/Model%20Api/auth_model.dart';
 import 'package:wit101/view/screens/profile_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -360,7 +360,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                     email: controllerEmail.text,
                                                     password: controllerPass.text,
                                                     setPassword: setPassword)
-                                                .then((value) => DB()
+                                                .then((value) => DB_User()
                                                     .updateUser(
                                                         uid: uid,
                                                         name: name,
