@@ -21,6 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         MaterialPageRoute(builder: (context) => EditProfileScreen(post: post)));
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

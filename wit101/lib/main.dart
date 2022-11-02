@@ -18,7 +18,7 @@ void main() {
     const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
   );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive,
-        overlays: [SystemUiOverlay.bottom]);
+      overlays: [SystemUiOverlay.bottom]);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) => runApp(
       const MyApp(),

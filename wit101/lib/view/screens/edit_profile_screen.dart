@@ -21,7 +21,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   var controllerID = TextEditingController();
   var controllerName = TextEditingController();
   var controllerEmail = TextEditingController();
@@ -200,7 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   right: 40,
                                 ),
                                 child: Form(
-                                  key: _formKey,
+                                  key: formKey,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -213,7 +213,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           textInputType: TextInputType.text,
                                           maxLines: 1,
                                           minLines: 1,
-                                          hintText: 'Name'),
+                                          hintText: 'Name',
+                                          onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          }),
                                       const SizedBox(height: 14),
                                       profileTextField(
                                           controller: controllerEmail,
@@ -221,14 +224,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               TextInputType.emailAddress,
                                           maxLines: 1,
                                           minLines: 1,
-                                          hintText: 'Email'),
+                                          hintText: 'Email',
+                                          onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          }
+                                          ),
                                       const SizedBox(height: 14),
                                       profileTextField(
                                           controller: controllerAddress,
                                           textInputType: TextInputType.text,
                                           maxLines: 1,
                                           minLines: 1,
-                                          hintText: 'Address'),
+                                          hintText: 'Address',
+                                          onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          }),
                                       const SizedBox(height: 14),
                                       TextFormField(
                                         validator: (value) {
@@ -237,6 +247,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           }
                                           return null;
                                         },
+                                        onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          },
                                         controller: controllerPass,
                                         keyboardType: TextInputType.text,
                                         style: GoogleFonts.poppins(
@@ -465,14 +478,10 @@ Widget profileTextField({
   required int maxLines,
   required int minLines,
   required String hintText,
+  required,
+  required Null Function(dynamic val) onChanged,
 }) {
   return TextFormField(
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return '*required field';
-      }
-      return null;
-    },
     controller: controller,
     keyboardType: textInputType,
     maxLines: maxLines,
@@ -506,6 +515,15 @@ Widget profileTextField({
         borderRadius: BorderRadius.circular(8),
       ),
     ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return '*required field';
+      }
+      return null;
+    },
+    onChanged: (val) {
+      onChanged;
+    },
   );
 }
 

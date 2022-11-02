@@ -1,12 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wit101/model/model%20Class/price_model.dart';
 import 'package:wit101/utility/warna.dart';
 
 import '../../utility/poppins_text.dart';
 
 class EditPriceScreen extends StatefulWidget {
-  const EditPriceScreen({super.key});
+  final DocumentSnapshot post;
+  const EditPriceScreen({super.key, required this.post});
 
   @override
   State<EditPriceScreen> createState() => _EditPriceScreenState();
@@ -19,7 +22,21 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
   var controllerPercentage = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+
+    controllerMinPrice.text = widget.post.get("harga_min");
+    controllerMaxPrice.text = widget.post.get("harga_max");
+    controllerPercentage.text = widget.post.get("persentase");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var id = widget.post.get('id');
+    var hargaMin = controllerMinPrice.text;
+    var hargaMax = controllerMaxPrice.text;
+    var persentase = controllerPercentage.text;
+    
     return Scaffold(
       backgroundColor: MyColors.black(),
       extendBodyBehindAppBar: true,
@@ -28,7 +45,9 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: SvgPicture.asset('assets/svg/profile_back_icon.svg'),
         ),
       ),
@@ -55,7 +74,8 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
                       warna: Colors.white,
                       fontWeight: FontWeight.w700),
                   PoppinsText.custom(
-                      text: 'Rp. 0 - Rp. 1.000.000',
+                      text:
+                          'Rp. ${(controllerMinPrice.text)} - Rp. ${(controllerMaxPrice.text)}',
                       fontSize: 18,
                       warna: Colors.white,
                       fontWeight: FontWeight.w700),
@@ -88,7 +108,7 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          profileDisabledTextField('ID'),
+                          profileDisabledTextField(widget.post.get('id')),
                           const SizedBox(height: 14),
                           profileTextField(
                               controller: controllerMinPrice,
@@ -115,7 +135,9 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
                             width: double.infinity,
                             height: 40,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Price().updatePrice(id: id, hargaMin: hargaMin, persentase: persentase, hargaMax: hargaMax).whenComplete(() =>  Navigator.pop(context));
+                              },
                               child: PoppinsText.custom(
                                   text: 'Save Price',
                                   fontSize: 12,

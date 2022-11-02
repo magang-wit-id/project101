@@ -14,7 +14,7 @@ class UserList extends StatefulWidget {
 }
 
 class _UserListState extends State<UserList> {
-  var controlerpass = TextEditingController();
+  var controlerSearch = TextEditingController();
 
   toDetail(DocumentSnapshot post) {
     Navigator.push(context,
@@ -25,19 +25,18 @@ class _UserListState extends State<UserList> {
   String userNameText = "";
 
   initSearchPost(String textEntered) {
-    if (controlerpass.text.isEmpty){
+    if (controlerSearch.text.isEmpty){
       postDocumentList = FirebaseFirestore.instance
         .collection('bd_userdata')
-        
         .get();
 
     setState(() {
       postDocumentList;
     });
-    }else if (controlerpass.text.isNotEmpty){
+    }else if (controlerSearch.text.isNotEmpty){
       postDocumentList = FirebaseFirestore.instance
         .collection('bd_userdata')
-        .where("name", isEqualTo: controlerpass.text)
+        .where("name", isEqualTo: controlerSearch.text)
         .get();
 
     setState(() {
@@ -75,7 +74,7 @@ class _UserListState extends State<UserList> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('bd_userdata')
-                       .where("name", isEqualTo: controlerpass.text)
+                       .where("name", isGreaterThanOrEqualTo: controlerSearch.text)
                       .snapshots(),
                   builder: (context, snapshots) {
                     return (snapshots.connectionState ==
@@ -163,7 +162,7 @@ class _UserListState extends State<UserList> {
           });
           initSearchPost(textEntered);
         },
-        controller: controlerpass,
+        controller: controlerSearch,
         decoration: InputDecoration(
           // ignore: prefer_const_constructors
           suffixIcon: IconButton(
