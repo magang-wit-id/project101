@@ -446,15 +446,6 @@ class MyDrawer extends StatelessWidget {
                                                   EdgeInsets.only(left: 120)),
                                          ],
                                         ),
-<<<<<<< HEAD
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            const Icon(Icons.wallet),
-                                            PoppinsText.custom(
-                                                text: 'Price List',
-=======
                                       ),
                                       const SizedBox(
                                         height: 10,
@@ -487,7 +478,6 @@ class MyDrawer extends StatelessWidget {
                                                 Icons.price_change_outlined),
                                             PoppinsText.custom(
                                                 text: 'Add Price',
->>>>>>> 796c617059cb0c8b8fd08a4ca9860fb9fec2d5ee
                                                 fontSize: 12,
                                                 warna: MyColors.black(),
                                                 fontWeight: FontWeight.w500),
@@ -495,46 +485,6 @@ class MyDrawer extends StatelessWidget {
                                                 padding:
                                                     EdgeInsets.only(left: 120)),
                                           ],
-<<<<<<< HEAD
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        GestureDetector(
-                                          onTap: (){ 
-                                             Navigator.of(context).push(PageRouteBuilder(
-                                    pageBuilder: ((context, animation,
-                                        secondaryAnimation) {
-                                  return const AddPrice();
-                                }), transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                  return SlideTransition(
-                                    position: Tween<Offset>(
-                                      begin: const Offset(-0.7, 0),
-                                      end: Offset.zero,
-                                    ).animate(animation),
-                                    child: child,
-                                  );
-                                }));
-                                          },
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              const Icon(
-                                                  Icons.price_change_outlined),
-                                              PoppinsText.custom(
-                                                  text: 'Add Price',
-                                                  fontSize: 12,
-                                                  warna: MyColors.black(),
-                                                  fontWeight: FontWeight.w500),
-                                              const Padding(
-                                                  padding:
-                                                      EdgeInsets.only(left: 120)),
-                                            ],
-                                          ),
-=======
->>>>>>> 796c617059cb0c8b8fd08a4ca9860fb9fec2d5ee
                                         ),
                                       ),
                                       const SizedBox(
