@@ -7,6 +7,7 @@ import 'package:wit101/utility/warna.dart';
 import 'package:wit101/view/screens/projectlist.dart';
 import 'package:wit101/widgets/drawer_screen.dart';
 import 'package:provider/provider.dart';
+
 class Addproject extends StatefulWidget {
   const Addproject({Key? key}) : super(key: key);
 
@@ -23,14 +24,11 @@ class _AddprojectState extends State<Addproject> {
 
   var workerController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
-    provider myprovider = Provider.of<provider>(context);
 
-    return Scaffold( 
+    return Scaffold(
       extendBodyBehindAppBar: true,
-     
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -44,7 +42,7 @@ class _AddprojectState extends State<Addproject> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 20, left: 10,right: 10),
+              padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -57,135 +55,137 @@ class _AddprojectState extends State<Addproject> {
                     ),
                   ],
                 ),
-                child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
-                    
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                     Padding(
-                         padding: const EdgeInsets.only( left: 55, right: 55), 
-                         child: SizedBox(
-                         height: 200, 
-                         width: 150,
-                        child : SvgPicture.asset('assets/svg/icongay.svg', fit: BoxFit.contain,)),),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [ 
-                       SizedBox(
-                      width: 320,
-                      height: 50,
-                      child: TextFormField(
-                        autofocus: true,
-                        controller: projectnameController,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.black()
-                            ),
-                            borderRadius: BorderRadius.circular(8),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 55, right: 55),
+                        child: SizedBox(
+                            height: 200,
+                            width: 150,
+                            child: SvgPicture.asset(
+                              'assets/svg/icongay.svg',
+                              fit: BoxFit.contain,
+                            )),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 320,
+                                height: 50,
+                                child: TextFormField(
+                                  autofocus: true,
+                                  controller: projectnameController,
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: MyColors.black()),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: MyColors.black()),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    hintText: 'Project Name',
+                                  ),
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 14),
+                                width: 320,
+                                height: 50,
+                                child: TextFormField(
+                                  controller: dealPriceController,
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: MyColors.black()),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    hintText: 'Deal Price',
+                                  ),
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 14),
+                                width: 320,
+                                height: 50,
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  controller: durationController,
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: MyColors.black()),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    hintText: 'Duration (Month)',
+                                  ),
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 14),
+                                width: 320,
+                                height: 50,
+                                child: TextFormField(
+                                  keyboardType: TextInputType.number,
+                                  controller: workerController,
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: MyColors.black()),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    hintText: 'Worker (s)',
+                                  ),
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12),
+                                ),
+                              ),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 25)),
+                              SizedBox(
+                                width: 320,
+                                height: 50,
+                                child: buttonSave(),
+                              ),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 10)),
+                              SizedBox(
+                                width: 320,
+                                height: 50,
+                                child: buttonCancel(),
+                              ),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20))
+                            ],
                           ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.black()
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          hintText: 'Project Name',
                         ),
-                        style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500, fontSize: 12),
-                      ),
-                    ),
-                             Container(
-                        margin: const EdgeInsets.only(top: 14),
-                        width: 320,
-                        height: 50,
-                        child: TextFormField(
-                          controller: dealPriceController,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.black()
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            hintText: 'Deal Price',
-                          ),
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500, fontSize: 12),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 14),
-                        width: 320,
-                        height: 50,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          controller: durationController,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.black()
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-
-                             hintText: 'Duration (Month)',
-                          
-                          ),
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500, fontSize: 12),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 14),
-                        width: 320,
-                        height: 50,
-                        child: TextFormField(
-                           keyboardType: TextInputType.number,
-                          controller: workerController,
-                          decoration: InputDecoration(
-                            focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: MyColors.black()
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                           hintText: 'Worker (s)',
-                          ),
-                          style: GoogleFonts.poppins(
-                              fontWeight: FontWeight.w500, fontSize: 12),
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(bottom: 25)),
-                      SizedBox(
-                    
-                        width: 320,
-                        height: 50,
-                        child: buttonSave(),
-                      ),
-                      const Padding(padding: EdgeInsets.only(bottom: 10)),
-                      SizedBox(
-              
-                        width: 320,
-                        height: 50,
-                        child: buttonCancel(),
-                      ),
-                      const Padding(padding: EdgeInsets.only(bottom: 20))
-                        ],
-                      ),
-                    ),
-                  )
+                      )
                     ],
                   ),
                 ),
@@ -208,7 +208,8 @@ class _AddprojectState extends State<Addproject> {
       height: 154,
       child: Stack(
         children: [
-          Padding( padding: const EdgeInsets.only(top: 84, left: 45),
+          Padding(
+            padding: const EdgeInsets.only(top: 84, left: 45),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -226,45 +227,38 @@ class _AddprojectState extends State<Addproject> {
             ),
           ),
           Align(
-            alignment: Alignment.topRight,
-            child: Image.asset('assets/png/circle_5.png' , alignment: Alignment.topRight,)),
+              alignment: Alignment.topRight,
+              child: Image.asset(
+                'assets/png/circle_5.png',
+                alignment: Alignment.topRight,
+              )),
         ],
       ),
     );
   }
 
-  
-
-  
-
-
-
-  
-
   Widget buttonSave() {
-      provider myprovider = Provider.of<provider>(context);
+    ProciderProject myprovider = Provider.of<ProciderProject>(context);
     return ElevatedButton(
-      onPressed: (){
-                          myprovider.tambahproject(
-                            projectname: projectnameController.text,
-                            dealprice:int.parse(dealPriceController.text),
-                            duration: durationController.text,
-                            worker: int.parse(workerController.text),
-                           );
-                          Navigator.of(context).push(
-                              PageRouteBuilder(
-                             pageBuilder: ((context, animation, secondaryAnimation){
-                               return Projectlist();
-                               }),
-                            transitionsBuilder: (context, animation, secondaryAnimation, child){
-                              final tween = Tween(begin: 0.0 , end: 1.0);
-                              return ScaleTransition(
-                                scale: animation.drive(tween),
-                                child: child
-                                ,);
-                            }
-                          ));
-                      },
+      onPressed: () {
+        myprovider.tambahproject(
+          projectname: projectnameController.text,
+          dealprice: int.parse(dealPriceController.text),
+          duration: durationController.text,
+          worker: int.parse(workerController.text),
+        );
+        Navigator.of(context).push(PageRouteBuilder(
+            pageBuilder: ((context, animation, secondaryAnimation) {
+          return const Projectlist();
+        }), transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+          final tween = Tween(begin: 0.0, end: 1.0);
+          return ScaleTransition(
+            scale: animation.drive(tween),
+            child: child,
+          );
+        }));
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color.fromRGBO(232, 23, 31, 1),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

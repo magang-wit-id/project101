@@ -113,8 +113,18 @@ class Auth {
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
-
-    
     return null;
   }
+
+  //token
+  Future<void> idToken() async {
+    user.idTokenChanges().listen((User? user) {
+      if (user == null) {
+        log('User is currently signed out!');
+      } else {
+        log('gogo login');
+      }
+    });
+  }
+  
 }

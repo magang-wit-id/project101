@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:wit101/model/Model%20Api/auth_model.dart';
 import 'package:wit101/model/model%20Class/user_model.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
-import 'package:wit101/view/model/Model%20Api/auth_model.dart';
 import 'package:wit101/view/screens/profile_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   var controllerID = TextEditingController();
   var controllerName = TextEditingController();
   var controllerEmail = TextEditingController();
@@ -200,7 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   right: 40,
                                 ),
                                 child: Form(
-                                  key: _formKey,
+                                  key: formKey,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -213,7 +213,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           textInputType: TextInputType.text,
                                           maxLines: 1,
                                           minLines: 1,
-                                          hintText: 'Name'),
+                                          hintText: 'Name',
+                                          onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          }),
                                       const SizedBox(height: 14),
                                       profileTextField(
                                           controller: controllerEmail,
@@ -221,14 +224,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               TextInputType.emailAddress,
                                           maxLines: 1,
                                           minLines: 1,
-                                          hintText: 'Email'),
+                                          hintText: 'Email',
+                                          onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          }
+                                          ),
                                       const SizedBox(height: 14),
                                       profileTextField(
                                           controller: controllerAddress,
                                           textInputType: TextInputType.text,
                                           maxLines: 1,
                                           minLines: 1,
-                                          hintText: 'Address'),
+                                          hintText: 'Address',
+                                          onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          }),
                                       const SizedBox(height: 14),
                                       TextFormField(
                                         validator: (value) {
@@ -237,6 +247,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           }
                                           return null;
                                         },
+                                        onChanged: (val) {
+                                            formKey.currentState!.validate();
+                                          },
                                         controller: controllerPass,
                                         keyboardType: TextInputType.text,
                                         style: GoogleFonts.poppins(
@@ -354,26 +367,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         width: double.infinity,
                                         height: 40,
                                         child: ElevatedButton(
-                                          onPressed: () async {
-                                            Auth()
-                                                .userChanges(
-                                                    email: controllerEmail.text,
-                                                    password: controllerPass.text,
-                                                    setPassword: setPassword)
-                                                .then((value) => DB()
-                                                    .updateUser(
-                                                        uid: uid,
-                                                        name: name,
-                                                        email: controllerEmail.text,
-                                                        password: controllerPass.text,
-                                                        role: role.toString(),
-                                                        alamat: alamat))
-                                                .whenComplete(() =>
-                                                    Navigator.pushReplacement(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                const ProfileScreen())));
+                                          onPressed: () {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              Auth()
+                                                  .userChanges(
+                                                      email:
+                                                          controllerEmail.text,
+                                                      password:
+                                                          controllerPass.text,
+                                                      setPassword: setPassword)
+                                                  .then((value) => DB()
+                                                      .updateUser(
+                                                          uid: uid,
+                                                          name: name,
+                                                          email: controllerEmail
+                                                              .text,
+                                                          password:
+                                                              controllerPass
+                                                                  .text,
+                                                          role: role.toString(),
+                                                          alamat: alamat))
+                                                  .whenComplete(() =>
+                                                      Navigator.pushReplacement(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  const ProfileScreen())));
+                                            }
                                           },
                                           child: PoppinsText.custom(
                                               text: 'Save',
@@ -465,14 +486,10 @@ Widget profileTextField({
   required int maxLines,
   required int minLines,
   required String hintText,
+  required,
+  required Null Function(dynamic val) onChanged,
 }) {
   return TextFormField(
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return '*required field';
-      }
-      return null;
-    },
     controller: controller,
     keyboardType: textInputType,
     maxLines: maxLines,
@@ -506,6 +523,15 @@ Widget profileTextField({
         borderRadius: BorderRadius.circular(8),
       ),
     ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return '*required field';
+      }
+      return null;
+    },
+    onChanged: (val) {
+      onChanged;
+    },
   );
 }
 

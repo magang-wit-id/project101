@@ -1,10 +1,10 @@
 
-class addProject{
+class Projectadd{
   final String projectname;
   final int dealprice;
   final String duration; 
   final int worker;
-  addProject({
+  Projectadd({
   required this.projectname,
   required this.dealprice ,
   required this.duration,

@@ -1,25 +1,24 @@
 import 'package:flutter/widgets.dart';
 import 'package:wit101/model/model%20Class/addproject_model.dart';
-import 'package:wit101/view/screens/addproject.dart';
 
-class provider extends ChangeNotifier {
+class ProciderProject extends ChangeNotifier {
 
   //add to Cart
-List<addProject> addproject=[];
-List<addProject> newaddproject=[];
-late addProject Addproject;
+List<Projectadd> addproject=[];
+List<Projectadd> newaddproject=[];
+late Projectadd addProject;
 void tambahproject({
   required String projectname,
   required int dealprice,
   required String duration,
   required int worker,
   }){
-    Addproject = addProject(
+    addProject = Projectadd(
       projectname: projectname, 
       dealprice: dealprice, 
       duration: duration, 
       worker: worker,);
-  newaddproject.add(Addproject);
+  newaddproject.add(addProject);
   addproject = newaddproject;
 }
 }

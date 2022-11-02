@@ -28,6 +28,7 @@ class _DashboardState extends State<Dashboard> {
       if (user == null) {
         log('User is currently signed out!');
       } else {
+        auth.currentUser?.getIdToken(true);
         log('gogo login');
       }
     });
