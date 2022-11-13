@@ -22,17 +22,6 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
         child: Scaffold(
           backgroundColor: MyColors.black(),
           extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            toolbarHeight: 80,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: SvgPicture.asset('assets/svg/profile_back_icon.svg'),
-            ),
-          ),
           body: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -43,31 +32,47 @@ class _UserDetailScreenState extends State<UserDetailScreen> {
                   child: Image.asset('assets/png/circle_1.png'),
                 ),
                 Positioned(
-                  top: 45,
-                  right: 19,
-                  child: SizedBox(
-                    height: 24,
-                    width: 80,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: MyColors.red(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                  top: 35,
+                  right: 0,
+                  left: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 19, left: 7),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: SvgPicture.asset(
+                              'assets/svg/profile_back_icon.svg'),
                         ),
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset('assets/svg/export_logo.svg'),
-                          const SizedBox(width: 4),
-                          PoppinsText.custom(
-                              text: 'Export',
-                              fontSize: 10,
-                              warna: Colors.white,
-                              fontWeight: FontWeight.w500)
-                        ],
-                      ),
+                        SizedBox(
+                          height: 24,
+                          width: 80,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              backgroundColor: MyColors.red(),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset('assets/svg/export_logo.svg'),
+                                const SizedBox(width: 4),
+                                PoppinsText.custom(
+                                    text: 'Export',
+                                    fontSize: 10,
+                                    warna: Colors.white,
+                                    fontWeight: FontWeight.w500)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
