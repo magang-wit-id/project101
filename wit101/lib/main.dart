@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wit101/firebase_options.dart';
 import 'package:wit101/model/view_model/view_model_project.dart';
+import 'package:wit101/view/screens/adduser_screen.dart';
 import 'package:wit101/view/screens/login_screen.dart';
 
 void main() {
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const LoginScreen(),
+      home: const AddUserScreen(),
     ));
   }
 }

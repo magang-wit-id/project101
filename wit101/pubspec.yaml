@@ -48,6 +48,7 @@ dependencies:
   uuid: ^3.0.6
   email_validator: ^2.1.17
   fluttertoast: ^8.1.1
+  awesome_stepper: ^0.1.0
 
 dev_dependencies:
   flutter_test:
