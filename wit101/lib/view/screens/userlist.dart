@@ -2,9 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
+import 'package:wit101/view/screens/user_detail_screen.dart';
 import 'package:wit101/widgets/drawer_screen.dart';
-
-import 'detailuser.dart';
 
 class UserList extends StatefulWidget {
   const UserList({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class _UserListState extends State<UserList> {
 
   toDetail(DocumentSnapshot post) {
     Navigator.push(context,
-        MaterialPageRoute(builder: (context) => DetailUser(post: post)));
+        MaterialPageRoute(builder: (context) => UserDetailScreen(post: post)));
   }
 
   Future<QuerySnapshot>? postDocumentList;

@@ -1,11 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:wit101/model/model_api/auth_model.dart';
 import 'package:wit101/model/view_model/view_model_user.dart';
 import 'package:wit101/utility/poppins_text.dart';
@@ -34,6 +37,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   File? _photo;
   final ImagePicker _picker = ImagePicker();
+
+  var auth = FirebaseAuth.instance;
 
   Future imgFromGallery() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -96,22 +101,26 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     controllerPass.text = widget.post.get("password");
     dropdownPick = widget.post.get('role');
     super.initState();
+
+    auth.idTokenChanges().listen((User? user) {
+      if (user == null) {
+        log('User is currently signed out!');
+      } else {
+        auth.currentUser?.getIdToken(true);
+        log(auth.currentUser!.email.toString());
+        log(widget.post.get("password"));
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var uid = controllerID.text;
-    var name = controllerName.text;
-    var alamat = controllerAddress.text;
-    var role = dropdownPick;
-
-    //cerdenalitas
-    var setPassword = widget.post.get("password");
-
+    DBUser dbUser = Provider.of<DBUser>(context, listen: false);
+    dbUser = Provider.of<DBUser>(context);
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('bd_userdata')
-            .doc(uid)
+            .doc(widget.post.get("id_user"))
             .snapshots(),
         builder: (context, snapshots) {
           var data = snapshots.data;
@@ -227,8 +236,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           hintText: 'Email',
                                           onChanged: (val) {
                                             formKey.currentState!.validate();
-                                          }
-                                          ),
+                                          }),
                                       const SizedBox(height: 14),
                                       profileTextField(
                                           controller: controllerAddress,
@@ -248,8 +256,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           return null;
                                         },
                                         onChanged: (val) {
-                                            formKey.currentState!.validate();
-                                          },
+                                          formKey.currentState!.validate();
+                                        },
                                         controller: controllerPass,
                                         keyboardType: TextInputType.text,
                                         style: GoogleFonts.poppins(
@@ -371,17 +379,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             Auth()
                                                 .userChanges(
                                                     email: controllerEmail.text,
-                                                    password: controllerPass.text,
-                                                    setPassword: setPassword)
-                                                .then((value) => DB_User()
-                                                    .updateUser(
-                                                        uid: uid,
-                                                        name: name,
-                                                        email: controllerEmail.text,
-                                                        password: controllerPass.text,
-                                                        role: role.toString(),
-                                                        alamat: alamat))
-                                                .whenComplete(() =>
+                                                    password:
+                                                        controllerPass.text,
+                                                    setPassword: widget.post
+                                                        .get("password"))
+                                                .then((value) => dbUser.updateUser(
+                                                    uid: controllerID.text,
+                                                    name: controllerName.text,
+                                                    email: controllerEmail.text,
+                                                    password:
+                                                        controllerPass.text,
+                                                    role:
+                                                        dropdownPick.toString(),
+                                                    alamat:
+                                                        controllerAddress.text))
+                                                .then((value) =>
+                                                    Fluttertoast.showToast(
+                                                        msg:
+                                                            "Profile Berhasil Di Update"))
+                                                .then((result) =>
                                                     Navigator.pushReplacement(
                                                         context,
                                                         MaterialPageRoute(

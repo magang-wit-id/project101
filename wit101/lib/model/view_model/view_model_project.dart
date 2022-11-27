@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-class DB_Project extends ChangeNotifier {
+class DBProject extends ChangeNotifier {
 
   final db = FirebaseFirestore.instance.collection("bd_project");
 

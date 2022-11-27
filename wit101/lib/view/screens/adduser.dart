@@ -285,13 +285,13 @@ class _AddUserState extends State<AddUser> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                DB_User().addUser(
+                                DBUser().addUser(
                                     uid: uid,
                                     name: name,
                                     email: email,
                                     password: password,
                                     role: role,
-                                    alamat: alamat);
+                                    alamat: alamat, img: '');
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor:

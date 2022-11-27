@@ -356,7 +356,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                                         height: 40,
                                         child: ElevatedButton(
                                           onPressed: () async {
-                                            DB_User()
+                                            DBUser()
                                                 .updateUser(
                                                     uid: uid,
                                                     name: name,

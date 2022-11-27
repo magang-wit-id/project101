@@ -407,7 +407,7 @@ class _DetailUserState extends State<DetailUser> {
                                     const Spacer(),
                                     ElevatedButton(
                                       onPressed: () {
-                                        DB_User().deleteUser(uuid: uuid).then((value) => Navigator.pop(context));
+                                        DBUser().deleteUser(uuid: uuid).then((value) => Navigator.pop(context));
                                       },
                                       child: PoppinsText.custom(
                                           text: 'Delete Account',

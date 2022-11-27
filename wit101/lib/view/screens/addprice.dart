@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:wit101/model/view_model/price_model.dart';
+import 'package:wit101/model/view_model/view_model_price.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wit101/view/screens/dashboard.dart';
+import 'package:wit101/view/screens/pricelist.dart';
 
 class AddPrice extends StatefulWidget {
   const AddPrice({Key? key}) : super(key: key);
@@ -20,13 +22,12 @@ class _AddPriceState extends State<AddPrice> {
 
   var controllerPercentage = TextEditingController();
 
-  
-
   String id = const Uuid().v4();
 
   @override
   Widget build(BuildContext context) {
-    
+      DbPrice dbPrice = Provider.of<DbPrice>(context,listen : false); 
+      dbPrice = Provider.of<DbPrice>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -139,15 +140,31 @@ class _AddPriceState extends State<AddPrice> {
                               height: 40,
                               child: ElevatedButton(
                                 onPressed: () {
-                                   Price()
+                                  dbPrice
                                       .addPricer(
                                           id: id,
                                           hargaMin: controllerMinPrices.text,
                                           persentase: controllerPercentage.text,
-                                          hargaMax: controllerMaxPrices.text).then((value) => Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Dashboard())));
+                                          hargaMax: controllerMaxPrices.text)
+                                      .then((value) => Fluttertoast.showToast(
+                                          msg: "Price Berhasil Ditambahkan"))
+                                      .then((result) => Navigator.of(context)
+                                              .push(PageRouteBuilder(
+                                                  pageBuilder: ((context,
+                                                      animation,
+                                                      secondaryAnimation) {
+                                            return const PriceList();
+                                          }), transitionsBuilder: (context,
+                                                      animation,
+                                                      secondaryAnimation,
+                                                      child) {
+                                            final tween =
+                                                Tween(begin: 0.0, end: 1.0);
+                                            return FadeTransition(
+                                              opacity: animation.drive(tween),
+                                              child: child,
+                                            );
+                                          })));
                                 },
                                 child: PoppinsText.custom(
                                     text: 'Add Price',
@@ -172,8 +189,7 @@ class _AddPriceState extends State<AddPrice> {
                               height: 40,
                               child: ElevatedButton(
                                 onPressed: () {
-                                 
-                                     
+                                  Navigator.pop(context);
                                 },
                                 child: PoppinsText.custom(
                                     text: 'Cancel',

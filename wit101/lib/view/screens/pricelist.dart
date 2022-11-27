@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:wit101/model/view_model/price_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wit101/model/view_model/view_model_price.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/view/screens/edit_price_screen.dart';
+import 'package:wit101/widgets/drawer_screen.dart';
 
 class PriceList extends StatefulWidget {
   const PriceList({Key? key}) : super(key: key);
@@ -18,9 +20,16 @@ class _PriceListState extends State<PriceList> {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => EditPriceScreen(post: post)));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      drawer: const MyDrawer(),
       body: Column(
         children: [
           Stack(
@@ -51,265 +60,257 @@ class _PriceListState extends State<PriceList> {
                             itemBuilder: (context, index) {
                               var data = snapshots.data?.docs[index];
 
-                              return 
-                                SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            
-                                           
-                                            top: 10,
-                                            bottom: 10),
-                                        child: Container(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 161,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(0, 1),
-                                                blurRadius: 5,
-                                                color: Colors.black
-                                                    .withOpacity(0.3),
-                                              ),
-                                            ],
-                                            color: Colors.white,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
+                              return SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10, bottom: 10),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 161,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: const Offset(0, 1),
+                                              blurRadius: 5,
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                            ),
+                                          ],
+                                          color: Colors.white,
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 10,
+                                                        left: 16,
+                                                      ),
+                                                      child: PoppinsText.custom(
+                                                        text: 'ID :',
+                                                        fontSize: 14,
+                                                        warna: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        top: 10,
+                                                        left: 5,
+                                                      ),
+                                                      child: PoppinsText.custom(
+                                                        text: data!['id'],
+                                                        fontSize: 13,
+                                                        warna: MyColors.red(),
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Divider(
+                                                  height: 20,
+                                                  thickness: 2,
+                                                  color: MyColors.lightGrey(),
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 16),
+                                                      child: PoppinsText.custom(
+                                                        text: data['harga_min'],
+                                                        fontSize: 14,
+                                                        warna: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: PoppinsText.custom(
+                                                        text: '-',
+                                                        fontSize: 14,
+                                                        warna: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: PoppinsText.custom(
+                                                        text: data['harga_max'],
+                                                        fontSize: 14,
+                                                        warna: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 3,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 16),
+                                                      child: PoppinsText.custom(
+                                                        text: 'Persentage',
+                                                        fontSize: 12,
+                                                        warna: const Color
+                                                                .fromRGBO(
+                                                            203, 203, 203, 1),
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: PoppinsText.custom(
+                                                        text: ':',
+                                                        fontSize: 12,
+                                                        warna: const Color
+                                                                .fromRGBO(
+                                                            203, 203, 203, 1),
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: PoppinsText.custom(
+                                                        text:
+                                                            data['persentase'],
+                                                        fontSize: 12,
+                                                        warna: const Color
+                                                                .fromRGBO(
+                                                            203, 203, 203, 1),
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 15,
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 20),
+                                                  child: Row(
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          top: 10,
-                                                          left: 16,
-                                                        ),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: 'ID :',
-                                                          fontSize: 14,
-                                                          warna: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                          top: 10,
-                                                          left: 5,
-                                                        ),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: data!['id'],
-                                                          fontSize: 13,
-                                                          warna: MyColors.red(),
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Divider(
-                                                    height: 20,
-                                                    thickness: 2,
-                                                    color: MyColors.lightGrey(),
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 16),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: data['harga_min'],
-                                                          fontSize: 14,
-                                                          warna: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 5),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: '-',
-                                                          fontSize: 14,
-                                                          warna: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 5),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: data['harga_max'],
-                                                          fontSize: 14,
-                                                          warna: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 3,
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 16),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: 'Persentage',
-                                                          fontSize: 12,
-                                                          warna: const Color
-                                                                  .fromRGBO(
-                                                              203, 203, 203, 1),
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 5),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: ':',
-                                                          fontSize: 12,
-                                                          warna: const Color
-                                                                  .fromRGBO(
-                                                              203, 203, 203, 1),
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 5),
-                                                        child:
-                                                            PoppinsText.custom(
-                                                          text: data['persentase'],
-                                                          fontSize: 12,
-                                                          warna: const Color
-                                                                  .fromRGBO(
-                                                              203, 203, 203, 1),
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 15,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 20),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: SizedBox(
-                                                            height: 40,
-                                                            child:
-                                                                ElevatedButton(
-                                                              onPressed: () {
-                                                                toDetail(snapshots.data!.docs[index]);
-                                                              },
-                                                              child: PoppinsText.custom(
-                                                                  text:
-                                                                      'Edit Price',
-                                                                  fontSize: 14,
-                                                                  warna: MyColors
-                                                                      .red(),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                              style:
-                                                                  ElevatedButton
-                                                                      .styleFrom(
-                                                                elevation: 0,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .white,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  side:
-                                                                      BorderSide(
-                                                                    color: MyColors
-                                                                        .red(),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          width: 10,
-                                                        ),
-                                                        SizedBox(
+                                                      Expanded(
+                                                        child: SizedBox(
                                                           height: 40,
                                                           child: ElevatedButton(
                                                             onPressed: () {
-                                                              Price().deletePrice(id: data['id']);
+                                                              toDetail(snapshots
+                                                                  .data!
+                                                                  .docs[index]);
                                                             },
+                                                            child: PoppinsText.custom(
+                                                                text:
+                                                                    'Edit Price',
+                                                                fontSize: 14,
+                                                                warna: MyColors
+                                                                    .red(),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               elevation: 0,
                                                               backgroundColor:
-                                                                  MyColors
-                                                                      .red(),
+                                                                  Colors.white,
                                                               shape:
                                                                   RoundedRectangleBorder(
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
                                                                             8),
+                                                                side:
+                                                                    BorderSide(
+                                                                  color: MyColors
+                                                                      .red(),
+                                                                ),
                                                               ),
                                                             ),
-                                                            child: SvgPicture.asset(
-                                                                'assets/svg/trash.svg'),
                                                           ),
                                                         ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      SizedBox(
+                                                        height: 40,
+                                                        child: ElevatedButton(
+                                                          onPressed: () {
+                                                            DbPrice()
+                                                                .deletePrice(
+                                                                    id: data[
+                                                                        'id'])
+                                                                .then((value) =>
+                                                                    Fluttertoast
+                                                                        .showToast(
+                                                                            msg:
+                                                                                "Price Berhasil Di Hapus"));
+                                                          },
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            elevation: 0,
+                                                            backgroundColor:
+                                                                MyColors.red(),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                          ),
+                                                          child: SvgPicture.asset(
+                                                              'assets/svg/trash.svg'),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                );
-                              
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
                             });
                   }))
         ],

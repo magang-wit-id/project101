@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wit101/model/view_model/price_model.dart';
+import 'package:wit101/model/view_model/view_model_price.dart';
+import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 
-import '../../utility/poppins_text.dart';
 
 class EditPriceScreen extends StatefulWidget {
   final DocumentSnapshot post;
@@ -32,11 +33,6 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var id = widget.post.get('id');
-    var hargaMin = controllerMinPrice.text;
-    var hargaMax = controllerMaxPrice.text;
-    var persentase = controllerPercentage.text;
-    
     return Scaffold(
       backgroundColor: MyColors.black(),
       extendBodyBehindAppBar: true,
@@ -136,7 +132,15 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
                             height: 40,
                             child: ElevatedButton(
                               onPressed: () {
-                                Price().updatePrice(id: id, hargaMin: hargaMin, persentase: persentase, hargaMax: hargaMax).whenComplete(() =>  Navigator.pop(context));
+                                DbPrice()
+                                    .updatePrice(
+                                        id: widget.post.get('id'),
+                                        hargaMin: controllerMinPrice.text,
+                                        persentase: controllerPercentage.text,
+                                        hargaMax: controllerMaxPrice.text)
+                                    .then((value) => Fluttertoast.showToast(
+                                        msg: "Price Berhasil Di Update"))
+                                    .then((result) => Navigator.pop(context));
                               },
                               child: PoppinsText.custom(
                                   text: 'Save Price',
@@ -157,7 +161,14 @@ class _EditPriceScreenState extends State<EditPriceScreen> {
                             width: double.infinity,
                             height: 40,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                controllerMinPrice.text =
+                                    widget.post.get('harga_min');
+                                controllerPercentage.text =
+                                    widget.post.get('persentase');
+                                controllerMaxPrice.text =
+                                    widget.post.get('harga_max');
+                              },
                               child: PoppinsText.custom(
                                   text: 'Cancel',
                                   fontSize: 12,

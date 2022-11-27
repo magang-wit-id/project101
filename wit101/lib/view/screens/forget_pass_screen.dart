@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:wit101/model/model_api/auth_model.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
@@ -18,6 +19,8 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
   final controllerEmail = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Auth auth = Provider.of<Auth>(context, listen: false);
+    auth = Provider.of<Auth>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -25,13 +28,13 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
         children: [
           logo(),
           txtforget(),
-          formforget(context),
+          formforget(auth, context),
         ],
       )),
     );
   }
 
-  Form formforget(BuildContext context) {
+  Widget formforget(Auth auth, BuildContext context) {
     return Form(
       key: formKey,
       child: Column(
@@ -104,7 +107,7 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
                   ),
                   onPressed: () {
                     if(formKey.currentState!.validate()){
-                      Auth().sendPass(email: controllerEmail.text).then((result) {
+                      auth.sendPass(email: controllerEmail.text).then((result) {
                       if (result == null) {
                         Navigator.pushReplacement(
                             context,
@@ -163,7 +166,7 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
     );
   }
 
-  Container txtforget() {
+  Widget txtforget() {
     return Container(
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.only(left: 60, right: 166, top: 79, bottom: 28),
@@ -181,7 +184,7 @@ class _ForgetPassScreenState extends State<ForgetPassScreen> {
     );
   }
 
-  Container logo() {
+  Widget logo() {
     return Container(
       width: 120,
       height: 120,

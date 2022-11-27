@@ -3,13 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
-import 'package:wit101/model/model_api/api_model.dart';
 import 'package:wit101/model/view_model/view_model_project.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:wit101/view/screens/projectlist.dart';
 import 'package:wit101/widgets/drawer_screen.dart';
-import 'package:provider/provider.dart';
 
 class Addproject extends StatefulWidget {
   const Addproject({Key? key}) : super(key: key);
@@ -245,7 +243,7 @@ class _AddprojectState extends State<Addproject> {
 
     return ElevatedButton(
       onPressed: (){ 
-         DB_Project().addProject(
+         DBProject().addProject(
                   uid: uid,
                   projectname: projectnameController.text, 
                   dealprice: int.parse(dealPriceController.text), 
@@ -254,7 +252,7 @@ class _AddprojectState extends State<Addproject> {
                   );
                    Navigator.of(context).push(PageRouteBuilder(
                              pageBuilder: ((context, animation, secondaryAnimation){
-                               return Projectlist();
+                               return const Projectlist();
                                }),
                             transitionsBuilder: (context, animation, secondaryAnimation, child){
                               final tween = Tween(begin: 0.0 , end: 1.0);

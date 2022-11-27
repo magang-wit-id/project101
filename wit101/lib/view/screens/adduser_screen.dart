@@ -1,15 +1,24 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+import 'package:wit101/model/view_model/view_model_user.dart';
 import 'package:wit101/utility/poppins_text.dart';
 import 'package:wit101/utility/warna.dart';
 import 'package:awesome_stepper/awesome_stepper.dart';
+import 'package:wit101/view/screens/userlist.dart';
+import 'package:wit101/widgets/stepperscreen/steppereducation_screen.dart';
+import 'package:wit101/widgets/stepperscreen/stepperexperience_screen.dart';
 import 'package:wit101/widgets/stepperscreen/stepperprofile_screen.dart';
+import 'package:wit101/widgets/stepperscreen/stepperproject_screen.dart';
 import 'package:wit101/widgets/stepperscreen/stepperskill_screen.dart';
-
-import '../../widgets/stepperscreen/steppereducation_screen.dart';
-import '../../widgets/stepperscreen/stepperexperience_screen.dart';
-import '../../widgets/stepperscreen/stepperproject_screen.dart';
 
 class AddUserScreen extends StatefulWidget {
   const AddUserScreen({Key? key}) : super(key: key);
@@ -34,6 +43,8 @@ class _AddUserScreenState extends State<AddUserScreen> {
   var controllerStartYearExperience = TextEditingController();
   var controllerEndYearExperience = TextEditingController();
   var controllerPosition = TextEditingController();
+  var controllerAge = TextEditingController();
+  var controllerGender = TextEditingController();
 
   // Variable Skill Screen
   var controllerSchool = TextEditingController();
@@ -41,7 +52,6 @@ class _AddUserScreenState extends State<AddUserScreen> {
   var controllerStartYear = TextEditingController();
   var controllerEndYear = TextEditingController();
   var controllerIPK = TextEditingController();
-  var controllerAge = TextEditingController();
 
   // Variable Profile Screen
   var controllerFullName = TextEditingController();
@@ -61,8 +71,74 @@ class _AddUserScreenState extends State<AddUserScreen> {
   var controllerRole = TextEditingController();
   var controllerDescription = TextEditingController();
 
+  //add photo
+  File? _photo;
+  final ImagePicker _picker = ImagePicker();
+
+  Future imgFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        log('No image selected.');
+      }
+    });
+  }
+
+  Future imgFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _photo = File(pickedFile.path);
+        uploadFile();
+      } else {
+        log('No image selected.');
+      }
+    });
+  }
+
+  Future uploadFile() async {
+    if (_photo == null) return;
+
+    try {
+      final ref = FirebaseStorage.instance.ref('user').child(uid);
+      await ref.putFile(_photo!);
+      final storageRef = FirebaseStorage.instance.ref('user');
+      final imageUrl = await storageRef.child(uid).getDownloadURL();
+      FirebaseFirestore.instance
+          .collection('user_list')
+          .doc(uid)
+          .set({
+            'img': imageUrl,
+          })
+          .then((value) => Fluttertoast.showToast(msg: "Photo ADD"))
+          // ignore: invalid_return_type_for_catch_error
+          .catchError((error) => log("Failed to Image storage user: $error"));
+    } catch (error) {
+      log('error occured');
+    }
+  }
+
+  //uuid
+  String uid = const Uuid().v4();
+
+  //clear
+  Future clearText() async {
+    controllerSchool.clear();
+    controllerMajor.clear();
+    controllerStartYear.clear();
+    controllerEndYear.clear();
+    controllerIPK.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
+    DBUser dbUser = Provider.of<DBUser>(context, listen: false);
+    dbUser = Provider.of<DBUser>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -90,7 +166,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                 ),
                 child: SingleChildScrollView(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
+                    height: 650,
                     width: MediaQuery.of(context).size.width,
                     child: AwesomeStepper(
                       progressColor: MyColors.red(),
@@ -124,7 +200,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                                       ),
                                     ),
                                     child: PoppinsText.custom(
-                                      text: 'Cancel',
+                                      text: 'Back',
                                       fontSize: 14,
                                       warna: MyColors.black(),
                                       fontWeight: FontWeight.w500,
@@ -191,7 +267,21 @@ class _AddUserScreenState extends State<AddUserScreen> {
                                   width: 132,
                                   height: 40,
                                   child: ElevatedButton(
-                                    onPressed: null,
+                                    onPressed: () {
+                                      dbUser.addFullProfile(
+                                          uid: uid,
+                                          fullName: controllerFullName.text,
+                                          age: controllerAge.text,
+                                          gender: controllerGender.text,
+                                          position: controllerPositionProfile.text,
+                                          email: controllerEmail.text,
+                                          github: controllerGithub.text,
+                                          lamaBerkerja: controllerJob.text).then((value) =>  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const UserList())));
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: MyColors.red(),
                                       shape: RoundedRectangleBorder(
@@ -200,7 +290,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                                       disabledBackgroundColor: MyColors.red(),
                                     ),
                                     child: PoppinsText.custom(
-                                      text: 'Next',
+                                      text: 'Save',
                                       fontSize: 14,
                                       warna: Colors.white,
                                       fontWeight: FontWeight.w500,
@@ -230,23 +320,25 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             controllerGithub: controllerGithub,
                             controllerJob: controllerJob,
                             controllerPosition: controllerPositionProfile,
+                            controllerGender: controllerGender,
                           ),
                         ),
                         AwesomeStepperItem(
-                          label: 'Education',
-                          content: StepperEducation(
-                            controllerEndYear: controllerEndYear,
-                            controllerIPK: controllerIPK,
-                            controllerMajor: controllerMajor,
-                            controllerSchool: controllerSchool,
-                            controllerStartYear: controllerStartYear,
-                          ),
-                        ),
+                            label: 'Education',
+                            content: StepperEducation(
+                              uid: uid,
+                              controllerEndYear: controllerEndYear,
+                              controllerIPK: controllerIPK,
+                              controllerMajor: controllerMajor,
+                              controllerSchool: controllerSchool,
+                              controllerStartYear: controllerStartYear,
+                            )),
                         AwesomeStepperItem(
                           label: 'Skill',
                           content: StepperSkill(
                             controllerNote: controllerNote,
                             controllerSkill: controllerSkill,
+                            uidSkil: uid,
                           ),
                         ),
                         AwesomeStepperItem(
@@ -257,6 +349,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             controllerProject: controllerProject,
                             controllerRole: controllerRole,
                             controllerSkillProgram: controllerSkillProgram,
+                            uidProject: uid,
                           ),
                         ),
                         AwesomeStepperItem(
@@ -271,6 +364,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                             controllerPhone: controllerPhone,
                             controllerStartYearExperience:
                                 controllerStartYearExperience,
+                            uidExp: uid,
                           ),
                         ),
                       ],
@@ -280,6 +374,60 @@ class _AddUserScreenState extends State<AddUserScreen> {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget bottomSheet(BuildContext context) {
+    return Container(
+      height: 120,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Choose Profile Photo',
+            style:
+                GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 20),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: <Widget>[
+              SizedBox(
+                width: 80,
+                child: TextButton(
+                  onPressed: () {
+                    imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                  child: Column(
+                    children: const [
+                      Icon(Icons.camera),
+                      Text('Camera'),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 80,
+                child: TextButton(
+                  onPressed: () {
+                    imgFromGallery();
+                    Navigator.of(context).pop();
+                  },
+                  child: Column(
+                    children: const [
+                      Icon(Icons.photo_album),
+                      Text('Gallery'),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -306,11 +454,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
                     fontSize: 16,
                     warna: Colors.white,
                     fontWeight: FontWeight.w600),
-                PoppinsText.custom(
-                    text: nameBar,
-                    fontSize: 16,
-                    warna: Colors.white,
-                    fontWeight: FontWeight.w600),
+                
               ],
             ),
           ),
@@ -326,10 +470,13 @@ class _AddUserScreenState extends State<AddUserScreen> {
   Widget addPhoto() {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 115),
+        Padding(
+          padding: const EdgeInsets.only(top: 115),
           child: CircleAvatar(
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.transparent,
+            backgroundImage: _photo == null
+                ? const AssetImage('assets/png/stockprofile.png')
+                : FileImage(_photo!) as ImageProvider,
             radius: 100,
           ),
         ),
@@ -337,7 +484,10 @@ class _AddUserScreenState extends State<AddUserScreen> {
           height: 20,
         ),
         OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet(
+                context: context, builder: ((builder) => bottomSheet(context)));
+          },
           style: OutlinedButton.styleFrom(
             side: const BorderSide(color: Colors.white),
             shape:
